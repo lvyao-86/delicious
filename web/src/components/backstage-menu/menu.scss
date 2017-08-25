@@ -1,0 +1,47 @@
+img{
+	width: 200px;
+	height: 200px; 
+	float: left; 
+	border: 1px solid #ddd;
+	padding: 5px; 
+	border-bottom:0;
+	border-radius: 5px 5px 0 0;
+}
+.menu-box{
+	padding: 5px 10px;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	dl{
+		&:hover{
+			background: #eef1f6;
+			cursor: pointer;
+
+		}
+		margin-bottom: 10px;
+		padding: 10px;
+		dt{
+			overflow: hidden;
+			background: #FFF;
+		}
+		dd{	
+			background: #FFF;
+			border: 1px solid #ddd;
+			font-family: microsoft yahei;
+			
+		}
+		.pro-name{
+			font-size: 14px;
+			line-height: 36px;
+			font-weight: 600;
+			color: #666;
+		}
+		.pro-price{
+			color: #ff1a3a;
+		    font-size: 14px;
+		    font-weight: bold;
+		    margin: 10px 0 3px 0;
+		}
+    	
+	}
+}

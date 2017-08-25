@@ -15,8 +15,10 @@
 </script>
 
 <style lang="scss">
-*{padding:0; margin: 0;}
+body,li,ul,p,h1,h2,h3,dl,dd,dt{padding: 0; margin: 0;}
 body,html{height: 100%}
+a{text-decoration: none;}
+ul,li{list-style: none;} 
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -24,9 +26,6 @@ body,html{height: 100%}
   text-align: center;
   color: #2c3e50;
   height: 100%;
-  a{
-    text-decoration: none;
-  } 
 }
 
 </style>
