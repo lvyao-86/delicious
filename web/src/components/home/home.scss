@@ -1,0 +1,15 @@
+#home{height: 100%; }
+#header{height: 10%; background: #FFF0F5;}
+#footer{height: 10%; background: #AFEEEE;}
+#container{
+	height: 80%; 
+	background: #F0FFF0;
+	ul{
+		float: left;
+		width: 150px;
+		li{
+			border: 1px solid #ddd;
+			padding: 5px 0;
+		}
+	}
+}
