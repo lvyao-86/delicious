@@ -9,7 +9,7 @@ var urlencodedParser = bodyParser.urlencoded({ extended: true })
 
 exports.Register = function(app){
 
-    app.get('/repertorySearch', urlencodedParser, function(request, response){
+    app.post('/getProducts', urlencodedParser, function(request, response){
         
         var condition = "select * from products"
         //连接数据库
