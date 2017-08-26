@@ -1,10 +1,10 @@
 <template>
-	<div class="menu">
-		<dl>
-			<dd v-for="(item, idx) in data">
-				<div><img :src="'./src/assets/images/' + item.imgurl" ></div>
-				<div>{{item.name}}</div>
-				<div>￥{{item.price}}</div>
+	<div class="menu-box">
+		<dl v-for="(item, idx) in data">
+			<dt><img :src="'./src/assets/images/' + item.imgurl" ></dt>
+			<dd>
+				<span class="pro-name">{{item.name}}</span>
+				<span class="pro-price">￥{{item.price}}</span>
 			</dd>
 		</dl>
 	</div>
