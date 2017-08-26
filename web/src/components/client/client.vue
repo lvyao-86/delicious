@@ -1,8 +1,6 @@
 <template>
 	<div class="client">	
-		<orderlist></orderlist>
-		
-		
+		<orderlist></orderlist>	
 	</div>
 </template>
 

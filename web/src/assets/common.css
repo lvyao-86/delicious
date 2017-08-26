@@ -1,0 +1,10 @@
+
+*{margin:0;padding:0;}
+li{list-style:none;}
+a{text-decoration:none;}
+b{font-weight:normal;}
+i{font-style:normal;}
+.l {float:left;}
+.r{float:right;}
+.c:after{content:'';visibility:hidden;overflow:hidden;display: block;clear:both;height:0;}
+.c{zoom:1;}
