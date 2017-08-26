@@ -25,6 +25,7 @@ module.exports = {
         loader: 'babel-loader',
         exclude: /node_modules/
       },
+
       {
           test: /\.(jpe?g|png|gif|svg)$/i,
           use: [{
@@ -53,6 +54,7 @@ module.exports = {
           exclude: /node_modules/,
           loader: 'style-loader!css-loader?sourceMap' 
       },
+      
       { 
           test: /\.(woff|svg|eot|ttf)\??.*$/,
           exclude: /node_modules/,
