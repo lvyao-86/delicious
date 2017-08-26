@@ -27,6 +27,7 @@ const router = new VueRouter({
 		path: '/backstage',
 		name: 'backstage',
 		component: BackstageComponent,
+		redirect: '/menu',
 		children: [{
 			path: '/menu',
 			name: 'menu',
