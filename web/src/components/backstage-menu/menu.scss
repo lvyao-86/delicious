@@ -1,35 +1,24 @@
+
 img{
 	width: 200px;
 	height: 200px; 
 	float: left; 
-	border: 1px solid #ddd;
 	padding: 5px; 
-	border-bottom:0;
-	border-radius: 5px 5px 0 0;
+	
+}
+.backstage-content{
+	padding: 0 15px;
 }
 .menu-box{
-	padding: 5px 10px;
 	display: flex;
 	flex-wrap: wrap;
-	justify-content: center;
-	dl{
+	justify-content: space-around;
+	.el-card{
 		&:hover{
-			background: #eef1f6;
+			background: #ddd;
 			cursor: pointer;
-
 		}
-		margin-bottom: 10px;
-		padding: 10px;
-		dt{
-			overflow: hidden;
-			background: #FFF;
-		}
-		dd{	
-			background: #FFF;
-			border: 1px solid #ddd;
-			font-family: microsoft yahei;
-			
-		}
+		margin: 5px;
 		.pro-name{
 			font-size: 14px;
 			line-height: 36px;
@@ -42,6 +31,23 @@ img{
 		    font-weight: bold;
 		    margin: 10px 0 3px 0;
 		}
-    	
 	}
+}
+.search-box{
+	width: 50%;
+	padding-left: 10px;
+	margin-top: 15px;
+}
+.edit-box{
+	.edit-header{
+		background: #dff0d8;
+		height: 36px;
+		line-height: 36px;
+		font-weight: 600;
+	}
+	position: absolute;
+	background: #d1dbe5;
+	width: 300px;
+	top: 0;
+	left: 0;
 }

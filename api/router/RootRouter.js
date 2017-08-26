@@ -5,6 +5,9 @@ var cookieParser = require('cookie-parser');
 var session = require('express-session');
 
 
+var indent = require('./indent');
+
+
 
 exports.Register = function(express){
     var app = express();
@@ -47,5 +50,7 @@ exports.Register = function(express){
     })
 
     ProductsRouter.Register(app);
+    indent.Register(app);
+    
     return app;
 }
