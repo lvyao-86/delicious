@@ -43,6 +43,37 @@ const router = new VueRouter({
 				component: MenuComponent
 			}]
 		}]
+<<<<<<< HEAD
+=======
+	},
+	{
+		path: '/login',
+		name: 'login',
+		component: LoginComponent
+<<<<<<< HEAD
+	},
+	{
+		path:'/cook',
+		component: cook,
+	
+	},
+
+
+	]
+=======
+	},{
+		path: '/backstage',
+		name: 'backstage',
+		component: BackstageComponent,
+		redirect: '/menu',
+		children: [{
+			path: '/menu',
+			name: 'menu',
+			component: MenuComponent
+		}]
+	}]
+>>>>>>> 3cff849b0782c5b9302d0aa6a5272e965992fd18
+>>>>>>> cb01d895defbaae779fc752b1fdefdc9a71c4f3b
 })
 
 
