@@ -4,6 +4,7 @@ import HomeComponent from '../components/home/home.vue'
 import LoginComponent from '../components/login/login.vue'
 import ClientComponent from '../components/client/client.vue'
 
+import OrderComponent from '../components/orderlist/orderlist.vue'
 
 Vue.use(VueRouter)
 
@@ -12,16 +13,16 @@ const router = new VueRouter({
 		path: '/',
 		name: 'home',
 		component: HomeComponent,
-		children: [{
-			path: '/client',
-			name: 'client',
-			component: ClientComponent
-		}]
+		children: []
 	},{
 		path: '/login',
 		name: 'login',
 		component: LoginComponent
-	}]
+	},{
+			path: '/client',
+			name: 'client',
+			component: ClientComponent
+		}]
 })
 
 

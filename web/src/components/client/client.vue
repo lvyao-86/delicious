@@ -1,9 +1,16 @@
 <template>
-	<div class="client">
-		<p>--- 客户端 ---</p>
+	<div class="client">	
+		<orderlist></orderlist>
+		
+		
 	</div>
 </template>
 
 <script type="text/javascript">
-	export default {}
+	import orderlist from '../orderlist/orderlist.vue'
+	export default {
+		components:{
+			orderlist
+		}
+	}
 </script>
