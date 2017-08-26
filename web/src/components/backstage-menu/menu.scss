@@ -1,0 +1,9 @@
+img{width: 200px;height: 200px;}
+.menu{
+	padding: 5px 10px;
+	dl{
+		display: flex;
+    	flex-wrap: wrap;
+    	justify-content: space-between;
+	}
+}
