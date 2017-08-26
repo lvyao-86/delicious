@@ -1,0 +1,31 @@
+body{background: #bbcac7;}
+h1, h3{color: #fff;}
+h3{background: #7b191a; padding: 0.5rem; margin-top: 1rem; font-size: 24px;}
+.progress{
+	padding: 1rem;
+	overflow: hidden;
+	.order, .cooking{width: 47%; margin-top: 2rem;}
+	.order{float: left;}
+	.cooking{float: right;}
+	.order, .cooking{
+		//最大的表格
+		.el-table--fit{background: #d4d4d4;
+			margin-top: 1rem;
+			//thead
+			.el-table__header{
+				thead{background: #2c1a0e;}
+				th{text-align: center;}
+			}
+			//添加进的行
+			.el-table__row{
+				background-color: #d4d4d4;; 
+				color: #000;
+			}
+		}
+		
+	}
+		
+		
+	
+	
+}
