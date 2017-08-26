@@ -12,7 +12,7 @@
 				<li><router-link to="/login">后台管理</router-link></li>
 			</ul>
 			<ul>
-				<li v-for="(val, key) in data">{{key}}</li>
+				
 			</ul>
 			<router-view></router-view>
 		</div>
@@ -32,7 +32,7 @@
 			}
 		},
 		created(){
-			http.get('repertorySearch')
+			http.post('getProducts')
 			.then(response => {
 				this.data = response.data[0]
 			})

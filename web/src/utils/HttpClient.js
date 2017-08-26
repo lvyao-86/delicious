@@ -54,10 +54,10 @@ const HttpClient = {
     }),
 
     post: (path, formdata, query) => new Promise((resolve, reject) => {
-        if(path.indexOf('login/index') < 0 && !window.localStorage.getItem('access_token')){
+       /* if(path.indexOf('login/index') < 0 && !window.localStorage.getItem('access_token')){
             router.push({name: 'login'});
             return false;            
-        }        
+        }  */      
         $('.dk-spinner.dk-spinner-three-bounce, dk-spinner-mask').parent('div').show()
         request
             .post(getUrl(path))
