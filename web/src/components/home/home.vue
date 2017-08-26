@@ -8,11 +8,11 @@
 				<li><router-link to="/login">登录</router-link></li>
 				<li><router-link to="/register">注册</router-link></li>
 				<li><router-link to="/client">客户端</router-link></li>
-				<li><router-link to="/login">厨房端</router-link></li>
+				<li><router-link to="/cook">厨房端</router-link></li>
 				<li><router-link to="/login">后台管理</router-link></li>
 			</ul>
 			<ul>
-				<li v-for="(val, key) in data">{{key}}</li>
+				
 			</ul>
 			<router-view></router-view>
 		</div>
@@ -32,7 +32,7 @@
 			}
 		},
 		created(){
-			http.get('repertorySearch')
+			http.post('getProducts')
 			.then(response => {
 				this.data = response.data[0]
 			})
