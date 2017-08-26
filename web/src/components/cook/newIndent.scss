@@ -1,0 +1,23 @@
+table{width:100%;border-spacing:0;border-collapse:collapse;
+	
+	th{background:#EEF1F6;line-height:40px}
+	tr{border:1px solid #DFE6EC;padding:10px}
+	
+	td{padding:20px 10px;}
+	
+	.changebut{background:#DE5246;color:#fff}
+	.okbut,.changebut{border:0;width:40%;font-size:16px;line-height:30px;border-radius:5px;text-align:center}
+	.okbut{
+			font-size:20px; letter-spacing:20px;text-indent:20px;font-weight:bold;
+			color:#37AF19;background:#37AF19;overflow:hidden;line-height:30px;height:30px;width:0%;transition:1s;white-spacing:nowrap;float:left;
+			cursor:pointer;
+	}
+	
+	.caozuo{width:15%;
+		
+	}
+	.caibox{
+		width:745px;
+		li{font-weight:bold;background:#F86934;color:#fff;margin-bottom:5px;margin-left:5px;padding:5px;border-radius:3px;float:left}
+	}
+}
