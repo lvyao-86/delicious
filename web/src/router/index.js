@@ -29,11 +29,6 @@ const router = new VueRouter({
 			name: 'login',
 			component: LoginComponent
 		},{
-			path: '/client',
-			name: 'client',
-			component: ClientComponent
-		},
-		{
 			path:'/cook',
 			component: cook
 		},{
