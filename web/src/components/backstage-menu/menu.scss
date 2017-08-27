@@ -34,20 +34,57 @@ img{
 	}
 }
 .search-box{
-	width: 50%;
-	padding-left: 10px;
-	margin-top: 15px;
+	padding: 0 10px;
+	margin-top: 5px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	.el-input{
+		width: 50%;
+	}
+	.fa-plus-circle{
+		color: #666;
+		&:hover{
+			color: #F36A5A;
+		}
+	}
 }
 .edit-box{
+	position: absolute;
+	background: #fff;
+	border-radius: 5px;
+	width: 500px;
+	top: 8%;
+	left: 50%;
+	margin-left: -250px;
+	box-shadow: 5px 5px 5px #888888;
+	padding-bottom: 15px;
 	.edit-header{
-		background: #dff0d8;
+		background: #1DB0B8;
 		height: 36px;
 		line-height: 36px;
 		font-weight: 600;
+		border-radius: 5px 5px 0 0;
+		position: relative;
+		color: #FFF;
+		margin-bottom: 10px;
+		.close{
+			position: absolute;
+			right: 0;
+			padding: 0 10px;
+			font-size: 20px;
+			&:hover{
+				color: #F36A5A;
+				cursor: pointer;
+			}
+		}
 	}
-	position: absolute;
-	background: #d1dbe5;
-	width: 300px;
-	top: 0;
-	left: 0;
+	.el-form-item{
+		padding-right: 25px;
+		margin-bottom: 15px;
+	}
+	.editbox-button button{
+		background-color: #1DB0B8;
+		border-color: #1DB0B8;
+	}
 }

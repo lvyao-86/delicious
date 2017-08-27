@@ -2,6 +2,7 @@
 	height: 100%;
 	display: flex;
 	flex-direction: column;
+	font-family: "Microsoft YaHei";
 }
 .header{
 	display: flex;
@@ -62,10 +63,17 @@
 			color: #666;
 		}
 		.el-submenu__title{
-			border-bottom: 1px solid #ddd;
+			
 		}
 		.last-li{
 			padding-left: 7px!important;
+		}
+		.el-menu-item{
+			height: 32px;
+			line-height: 32px;
+		}
+		li .is-active{
+			background: #ddd;
 		} 
 	}
 	.backstage-content{
