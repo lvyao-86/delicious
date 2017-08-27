@@ -29,6 +29,7 @@ var upload = multer({ storage: storage })
 
 
 exports.Register = function(app){
+
 	
 	function getMenu(table, response){
 		var condition = "select * from " + table;

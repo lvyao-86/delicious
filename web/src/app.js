@@ -10,6 +10,7 @@ import store from './vuex/store'
 
 Vue.use(ElementUI)
 
+
 new Vue({
   el: '#app',
   router,

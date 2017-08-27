@@ -1,6 +1,6 @@
 <template>
 	<div class="addmenu-box">
-		<h3>新增菜式</h3>
+		<h4>新增菜式</h4>
 		<el-form ref="form" :model="form" :rules="rules" label-width="90px" >
 			<el-form-item label="菜名：" prop="name">
     			<el-input v-model="form.name"></el-input>
@@ -47,7 +47,7 @@
 				form: {name: '',description:'',category:'',price:'',timeConsuming:''},
 				category: {sala:'沙拉', snack:'小吃','staple-food':'主菜',soup:'汤品','main-course':'主食',dessert:'甜点',drink:'饮品'},
 				fileList: [],
-				rules:   
+				rules:{
 					name: [{ required: true, message: '请输入菜品名称', trigger: 'blur' }],
 					price: [{ type: 'number', required: true, message: '请输入价格，且只能为数字', trigger: 'blur' }],
 					category: [{ required: true, message: '请选择分类', trigger: 'change'  }]
