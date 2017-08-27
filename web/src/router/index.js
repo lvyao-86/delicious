@@ -2,7 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import HomeComponent from '../components/home/home.vue'
 import LoginComponent from '../components/login/login.vue'
-import ClientComponent from '../components/client/client.vue'
+
 
 import cook from '../components/cook/cook.vue'
 import newIndent from '../components/cook/newIndent.vue'
