@@ -1,5 +1,5 @@
 .cookmess{
-	
+	z-index:100;
 	.icon-youxiang{font-size:50px;}
 	dl{position:absolute;right: 54px;top: 0px; cursor:pointer}
 	dd{	position:absolute;    left: -13px;
@@ -10,7 +10,7 @@
 
 	
 
-		.tanc{position:fixed;width:70%;left:0;top:0;right:0;bottom:0;margin:auto;height:80%;padding:50px 0;
+		.tanc{position:fixed;z-index:10;width:70%;left:0;top:0;right:0;bottom:0;margin:auto;height:80%;padding:50px 0;
 				overflow:auto;border:1px solid #eee;box-shadow: 5px 5px 10px #999;
 			h3{border-bottom:1px solid #eee;line-height:50px;position:absolute;top:0;width:100%;
 				background:#fff;
