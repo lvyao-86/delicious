@@ -19,10 +19,7 @@
 				<el-menu default-active="2" class="menu">
 					<el-submenu index="1">
 			        	<template slot="title"><i class="fa fa-bank"></i>餐厅管理</template>
-		        		<el-menu-item index="1-1"><router-link to="/menu">菜单查询</router-link></el-menu-item>
-		        		<el-menu-item index="1-2"><router-link to="/menu">菜单查询</router-link></el-menu-item>
-		        		<el-menu-item index="1-3"><router-link to="/menu">菜单查询</router-link></el-menu-item>
-		        		<el-menu-item index="1-4"><router-link to="/menu">菜单查询</router-link></el-menu-item>
+		        		<el-menu-item index="1-1"><router-link to="dinnerTable">餐桌浏览</router-link></el-menu-item>
 			      	</el-submenu>
 			      	<el-submenu index="2">
 			        	<template slot="title"><i class="fa fa-sticky-note-o" ></i>菜单浏览</template>

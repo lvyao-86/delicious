@@ -14,6 +14,9 @@ const actions = {
 	},
 	searchMenu: (store, data) => {
 		store.commit('searchMenu', data)
+	},
+	dataReverse: (store) => {
+		store.commit('dataReverse')
 	}
 }
 
@@ -57,6 +60,10 @@ const mutations = {
  		.then(response => {
 			state.menu = response.data;
  		})
+ 	},
+
+ 	dataReverse: (_state) =>{
+ 		state.menu.reverse()
  	}
 }
 

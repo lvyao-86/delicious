@@ -1,6 +1,6 @@
 <template>
 	<div class="addmenu-box">
-		<h4>新增菜式</h4>
+		<h4>菜式新增</h4>
 		<el-form ref="form" :model="form" :rules="rules" label-width="90px" >
 			<el-form-item label="菜名：" prop="name">
     			<el-input v-model="form.name"></el-input>
@@ -87,6 +87,7 @@
 		          	offset: 100,
 		          	duration: 2000
 		        });
+		        this.$refs['form'].resetFields()
       		},
 
       		//上传失败提示信息

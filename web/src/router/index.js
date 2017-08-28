@@ -15,6 +15,7 @@ import AddMenuComponent from '../components/addmenu/addmenu.vue'
 import dishComponent from '../components/showdishes/dish.vue'
 
 import OrderComponent from '../components/orderlist/orderlist.vue'
+import DinnerTableComponent from '../components/dinner-table/dinner-table.vue'
 
 Vue.use(VueRouter)
 
@@ -44,6 +45,10 @@ const router = new VueRouter({
 			path: '/addmenu',
 			name: 'addmenu',
 			component: AddMenuComponent
+		},{
+			path: '/dinnerTable',
+			name: 'dinnerTable',
+			component: DinnerTableComponent
 		}]
 		},{
 		path: '/showdishes',
