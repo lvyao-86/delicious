@@ -9,7 +9,9 @@ var mysql = require('mysql');
         host     : 'localhost',
         user     : 'root',
         password : '',
-        database : 'zyy'
+        database : 'delicious'
+
+
     })
     connection.connect();
 

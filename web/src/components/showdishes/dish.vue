@@ -9,7 +9,7 @@
 			    border
 			    style="width: 100%">
 			    <el-table-column
-			      prop="date"
+			      prop="id"
 			      label="编号"
 			      width="50">
 			    </el-table-column>
@@ -45,7 +45,7 @@
 			    border
 			    style="width: 100%">
 			    <el-table-column
-			      prop="date"
+			      prop="id"
 			      label="编号"
 			      width="50">
 			    </el-table-column>
@@ -76,20 +76,23 @@
 </template>
 
 <script>
+	import http from '../../utils/HttpClient'
 	import './dish.scss'
 	export default {
 	    data() {
 	      return {
 	        tableData3: [{
-	          date: '1',
-	          name: '王小虎',
-	          address: '2'
-	        },{
-	          date: '1',
+	          id: '1',
 	          name: '王小虎',
 	          address: '2'
 	        }]
 	      }
-	    }
+	    },
+
+	    created(){
+	    	http.get('indent').then(response => {
+	    		console.log(response.data)
+	    	})
+	    } 
 	}
 </script>
