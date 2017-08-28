@@ -14,7 +14,7 @@
 				{{key == 'list' ? ''  : val}}
 					 <ul v-if="key == 'list'" class="caibox c">
 						<li v-for="(cai,idx)  in  val" :ref="'cs' + index" @click="addcolor(obj,$event)">{{'['+ cai.name + ']' + '  数量：' + cai.qty }}</li>
-						<span @click="successAll('c' + index,'cs' + index,$event)">全部制成</span>
+						<span @click="successAll('c' + index,'cs' + index,obj,$event)">全部制成</span>
 					</ul> 
 				</td>
 				<td class="caozuo"><button ref="obbut" class="okbut" @click="upDateIndent(obj.id,$event)">完成</button></td>
@@ -151,6 +151,10 @@ export default {
 				okbut.style.color = '#fff'
 			}
 
+			//推送信息给信箱
+			var mess = obj.number + '号桌: ' + ta.innerText + ' 已制成，速速来拿！';
+			this.cookMessToBOX(mess)
+
 		},
 		upDateIndent(id,e){
 			var ta = e.target;
@@ -178,7 +182,7 @@ export default {
 		
 		},
 
-		successAll(tr,cs,e){
+		successAll(tr,cs,obj,e){
 
 			var tr = this.$refs[tr];
 			var cais = this.$refs[cs];
@@ -207,6 +211,26 @@ export default {
 				})
 		
 			}
+
+			//推送消息给信箱
+			var mess = obj.number + '号桌: 全部已制成，速速来拿！';
+			this.cookMessToBOX(mess)
+			
+
+		},
+
+		cookMessToBOX(datas){
+			 //添加信息到信箱
+			 http.get('toLetter',{who:'cook',message:datas}).then(res=>{
+						console.log(res)
+				 		if(res.state){
+				 			console.log('推送成功')
+				 		}else{
+							console.log('推送失败')
+				 		}
+
+				 })
+
 
 		}
 	},

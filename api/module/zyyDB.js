@@ -11,6 +11,7 @@ var mysql = require('mysql');
         password : '',
         database : 'delicious'
 
+
     })
     connection.connect();
 
@@ -29,5 +30,18 @@ module.exports = {
            	
         });
     },
+     add:function(sql,arr,callback){
+
+    	connection.query(sql,arr,function(err,res,fie){
+     		if(!err){
+     			callback(res)
+     		}else{
+     			callback({state:false,message:'插入失败'})
+     		}
+
+
+     	})
+
+     }
    
 }
