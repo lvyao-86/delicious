@@ -14,7 +14,7 @@ import AddMenuComponent from '../components/addmenu/addmenu.vue'
 import DinnerTableComponent from '../components/dinner-table/dinner-table.vue'
 import LetterBoxComponent from '../components/letterbox/letterbox.vue'
 import dishComponent from '../components/showdishes/dish.vue'
-
+import chartsComponent from '../components/charts/charts.vue'
 
 Vue.use(VueRouter)
 
@@ -61,6 +61,10 @@ const router = new VueRouter({
 			path: '/letterBox',
 			name: 'letterBox',
 			component: LetterBoxComponent
+		},{
+			path: '/charts',
+			name: 'charts',
+			component: chartsComponent
 		}]
 		},{
 		path: '/showdishes',

@@ -33,8 +33,8 @@
 			      	</el-submenu>
 			      	<el-submenu index="3">
 			        	<template slot="title"><i class="fa fa-bar-chart"></i>营业分析</template>
-		        		<el-menu-item index="3-1"><router-link to="/menu">营业分析</router-link></el-menu-item>
-		        		<el-menu-item index="3-2"><router-link to="/menu">营业报表</router-link></el-menu-item>
+		        		<el-menu-item index="3-1"><router-link to="/charts">营业分析</router-link></el-menu-item>
+		        		<el-menu-item index="3-2"><router-link to="/charts">营业报表</router-link></el-menu-item>
 			      	</el-submenu>
 				    <el-menu-item index="4" class="last-li"><i class="fa fa-desktop"></i>收银台</el-menu-item>
 				    <el-menu-item index="5" class="last-li"><i class="fa fa-cog"></i>设置&nbsp;&nbsp;&nbsp;&nbsp;</el-menu-item>
