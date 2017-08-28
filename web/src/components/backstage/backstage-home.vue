@@ -6,7 +6,7 @@
 				<i class="fa fa-outdent"></i>
                 <div class="option">
                     <ul>
-                        <li><i class="fa fa-envelope"></i></li>
+                        <li class="letter-qty"><i class="fa fa-envelope" @click="openEnvelope"></i><span v-if="this.$store.state.backstageHome.letterQty > 0">{{this.$store.state.backstageHome.letterQty}}</span></li>
                         <li><i class="fa fa-bell"></i></li>
                         <li><i class="fa fa-user"></i></li>
                     </ul>
@@ -50,6 +50,7 @@
 <script type="text/javascript">
 	import './backstage-home.scss'
 	import menu from '../backstage-menu/menu.vue'
+	import http from '../../utils/HttpClient'
 	export default {
 		methods: {
 			toggle: function(e) {
@@ -69,7 +70,21 @@
 					var currentCategory = String.trim(e.target.innerHTML);//获取当前分类，去除前后空格
 					this.$store.dispatch('searchMenu', currentCategory)
 				}
-			}
+			},
+
+			openEnvelope(){
+				this.$router.push('letterbox')
+				this.$store.state.backstageHome.letterQty = 0;
+				this.$store.dispatch('getLetterBox')
+				http.get('clearLetterBox')
+				.then(response => {
+					console.log(response)
+				})
+			},
+
+		},
+		created(){
+			this.$store.dispatch('letterBox')
 		}
 	}
 </script>

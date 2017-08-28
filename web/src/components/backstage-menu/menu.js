@@ -50,6 +50,7 @@ const mutations = {
  		
  		http.post('editMenu', data.data)
  		.then(response => {
+ 			state.menu = response.data;
 			data.callback()
  		})
  	},

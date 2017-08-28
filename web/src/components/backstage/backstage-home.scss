@@ -43,6 +43,27 @@
 						font-size: 14px;
 					}
 				}
+				.fa-envelope{
+					&:hover{
+						cursor: pointer;
+					}
+				}
+				.letter-qty{
+					position: relative;
+					span{
+						position: absolute;
+					    top: -2px;
+					    left: 8px;
+					    background: #f00;
+					    display: block;
+					    font-size: 10px;
+					    width: 16px;
+					    height: 16px;
+					    line-height: 14px;
+					    border-radius: 50%;
+					    color: #fff;
+					}
+				}
 			}
 		}
 	}

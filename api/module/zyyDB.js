@@ -4,20 +4,22 @@ var ApiResult = require('./ApiResult')
 var mysql = require('mysql');
 
 
-function create() {
+
     connection = mysql.createConnection({
         host     : 'localhost',
         user     : 'root',
         password : '',
-        database : 'zyy'
+        database : 'delicious'
+
+
     })
     connection.connect();
-}
+
 
 module.exports = {
 
     get:function(sql,callback){
-        create();
+       
         //"select * from" + tableName + "where indexID = 1"
         connection.query(sql,function (error, results, fields) {
            	if(!error){
@@ -28,5 +30,18 @@ module.exports = {
            	
         });
     },
+     add:function(sql,arr,callback){
+
+    	connection.query(sql,arr,function(err,res,fie){
+     		if(!err){
+     			callback(res)
+     		}else{
+     			callback({state:false,message:'插入失败'})
+     		}
+
+
+     	})
+
+     }
    
 }

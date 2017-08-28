@@ -1,7 +1,8 @@
 .dinner-table{
 	font-size: 12px;
-	width: 45%;
+	width: 380px;
 	float: left;
+	border-right: 1px solid #ddd;
 	img{
 		width: 150px;
 		height: 100px;
@@ -43,5 +44,12 @@
     			color: #666;
     		}
 		}
+	}
+}
+.table-order{
+	overflow: hidden;
+	h2{
+		border-bottom: 1px solid #ddd;
+		padding: 5px 0;
 	}
 }
