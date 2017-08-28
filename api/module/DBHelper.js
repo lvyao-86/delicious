@@ -8,7 +8,7 @@ function create() {
         host     : 'localhost',
         user     : 'root',
         password : '',
-        database : 'zyy'
+        database : 'delicious'
     })
     connection.connect();
 }

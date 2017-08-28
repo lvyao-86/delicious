@@ -1,5 +1,5 @@
 <template>
-	<table>
+	<table class="cooktable">
 		<thead>
 				<tr>
 					<th v-for="(val,key) in list[0]" v-if="colss.indexOf(key) != -1">{{translate[key]}}</th>
