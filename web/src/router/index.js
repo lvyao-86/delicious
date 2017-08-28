@@ -15,6 +15,8 @@ import AddMenuComponent from '../components/addmenu/addmenu.vue'
 import dishComponent from '../components/showdishes/dish.vue'
 
 
+import menuShow from '../components/menuShow/menuShow.vue'
+
 Vue.use(VueRouter)
 
 const router = new VueRouter({
@@ -48,13 +50,16 @@ const router = new VueRouter({
 		path: '/showdishes',
 		name: 'dish',
 		component: dishComponent
-	},{
-		path: '/client',
-		name: 'client',
-		component: ClientComponent,
-		children:[]
-	}]
-
+		},{
+		path: '/menuShow',
+		name: 'menuShow',
+		component: menuShow
+		},{
+			path: '/client',
+			name: 'client',
+			component: ClientComponent,
+			children:[]
+		}]
 })
 
 
