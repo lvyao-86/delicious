@@ -9,7 +9,7 @@ function create() {
         host     : 'localhost',
         user     : 'root',
         password : '',
-        database : 'zyy'
+        database : 'epos'
     })
     connection.connect();
 }
