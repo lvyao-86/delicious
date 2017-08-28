@@ -15,7 +15,7 @@
 			</div>
 		</div>
 		<div class="content-wrap">
-			<div class="side-bar" ref="sidebar">
+			<div class="side-bar" ref="sidebar" @click="selectCategory">
 				<el-menu default-active="2" class="menu">
 					<el-submenu index="1">
 			        	<template slot="title"><i class="fa fa-bank"></i>餐厅管理</template>
@@ -25,11 +25,14 @@
 		        		<el-menu-item index="1-4"><router-link to="/menu">菜单查询</router-link></el-menu-item>
 			      	</el-submenu>
 			      	<el-submenu index="2">
-			        	<template slot="title"><i class="fa fa-sticky-note-o"></i>菜单管理</template>
-		        		<el-menu-item index="2-1"><router-link to="/menu">菜单浏览</router-link></el-menu-item>
-		        		<el-menu-item index="2-2"><router-link to="/menu">菜单查询</router-link></el-menu-item>
-		        		<el-menu-item index="2-3"><router-link to="/menu">菜单新增</router-link></el-menu-item>
-		        		<el-menu-item index="2-4"><router-link to="/menu">菜单删除</router-link></el-menu-item>
+			        	<template slot="title"><i class="fa fa-sticky-note-o" ></i>菜单浏览</template>
+		        		<el-menu-item 
+		        			:index="'2-' + (idx+1)" 
+		        			v-for="(item, idx) in this.$store.state.backstageMenu.category" 
+		        			key="idx"
+		        			class="category"
+		        			>{{item}}
+		        		</el-menu-item>
 			      	</el-submenu>
 			      	<el-submenu index="3">
 			        	<template slot="title"><i class="fa fa-bar-chart"></i>营业分析</template>
@@ -40,7 +43,7 @@
 				    <el-menu-item index="5" class="last-li"><i class="fa fa-cog"></i>设置&nbsp;&nbsp;&nbsp;&nbsp;</el-menu-item>
 			    </el-menu>
 			</div>
-			<div class="content">
+			<div class="backstage-content">
 				<router-view></router-view>
 			</div>
 		</div>
@@ -49,18 +52,27 @@
 
 <script type="text/javascript">
 	import './backstage-home.scss'
+	import menu from '../backstage-menu/menu.vue'
 	export default {
 		methods: {
 			toggle: function(e) {
+
+				//侧栏显示隐藏
 				let ele = e.target;
 				if(ele.classList.contains('fa-outdent')){
 					let status = this.$refs.sidebar.style.display 
 					status == 'none'?  this.$refs.sidebar.style.display = 'block' : this.$refs.sidebar.style.display = "none"
 				}
+			},
+
+			selectCategory: function(e){
+				//点击侧栏分类，获取相应数据
+				if(e.target.classList.contains('category')){ //事件监听，判断是否为target是否符合
+					this.$router.push('menu')
+					var currentCategory = String.trim(e.target.innerHTML);//获取当前分类，去除前后空格
+					this.$store.dispatch('searchMenu', currentCategory)
+				}
 			}
-		},
-		created(){
-			console.log(777)
 		}
 	}
 </script>

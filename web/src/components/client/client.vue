@@ -1,9 +1,18 @@
 <template>
-	<div class="client">
-		<p>--- ---</p>
+	<div id="client">
+		<orderlist></orderlist>
+		<tabButton></tabButton>
 	</div>
+		
 </template>
-
-<script type="text/javascript">
-	export default {}
+<script>
+    import './client.scss'
+	import orderlist from './orderlist.vue'
+	import tabButton from './tabButton.vue'
+	export default {
+		components:{
+			orderlist,
+			tabButton
+		}
+	}
 </script>

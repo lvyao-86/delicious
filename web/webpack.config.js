@@ -54,17 +54,9 @@ module.exports = {
         test: /\.css$/,
         loader: 'style-loader!css-loader'
       },
-// <<<<<<< HEAD
-      
-//       { 
-//           test: /\.(woff|svg|eot|ttf)\??.*$/,
-//           exclude: /node_modules/,
-//           loader: 'url-loader?limit=80000&name=fonts/[name].[md5.hash.hex:7].[ext]'
-// =======
       {
         test: /\.(eot|svg|ttf|woff|woff2)(\?\S*)?$/,
         loader: 'file-loader'
-
       },
       {
           test: /\.scss$/,
