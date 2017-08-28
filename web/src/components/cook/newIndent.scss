@@ -16,8 +16,12 @@ table{width:100%;border-spacing:0;border-collapse:collapse;
 	.caozuo{width:15%;
 		
 	}
-	.caibox{
+	.caibox{position:relative;min-height:72px;
 		width:745px;
-		li{font-weight:bold;background:#F86934;color:#fff;margin-bottom:5px;margin-left:5px;padding:5px;border-radius:3px;float:left}
+		span{width:60px;height:60px;font-size:14px;display:inline-block;background:#19AA8D;line-height:60px;color:#fff;border-radius:50%;font-weight:bold;
+
+				position:absolute;    right: -75px;top: 6px;cursor:pointer;
+		}
+		li{transition:1s;font-weight:bold;background:#F86934;color:#fff;margin-bottom:5px;margin-left:5px;padding:5px;border-radius:3px;float:left}
 	}
 }

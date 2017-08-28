@@ -13,11 +13,14 @@ exports.Register = function(app){
         var sql = "select * from indent"
         //连接数据库
         DB.get(sql, function(res){
-        	console.log(res)
+        	
         if(res.state == undefined){
+        	console.log('.',new Date())
         	response.send({status: true, message: '数据请求成功', data: res})
+
             return
         }else{
+        	
         	response.send({status: false, message: '请求失败', data: []})
             return
         }
