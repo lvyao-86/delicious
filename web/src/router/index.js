@@ -2,8 +2,8 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import HomeComponent from '../components/home/home.vue'
 import LoginComponent from '../components/login/login.vue'
-
-
+import ClientComponent from '../components/client/client.vue'
+ 
 import cook from '../components/cook/cook.vue'
 import newIndent from '../components/cook/newIndent.vue'
 
@@ -14,7 +14,6 @@ import AddMenuComponent from '../components/addmenu/addmenu.vue'
 
 import dishComponent from '../components/showdishes/dish.vue'
 
-import OrderComponent from '../components/orderlist/orderlist.vue'
 
 import menuShow from '../components/menuShow/menuShow.vue'
 
@@ -55,9 +54,12 @@ const router = new VueRouter({
 		path: '/menuShow',
 		name: 'menuShow',
 		component: menuShow
-		}
-	]
-
+		},{
+			path: '/client',
+			name: 'client',
+			component: ClientComponent,
+			children:[]
+		}]
 })
 
 

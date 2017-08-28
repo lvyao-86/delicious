@@ -5,9 +5,6 @@
 			<h1>logo</h1>
 		</div>
 		<h2>订单列表</h2>
-		<el-button>默认按钮</el-button>
-		<el-button type="primary">主要按钮</el-button>
-		<el-button type="text">文字按钮</el-button>
 		<div id="goodslist">
 			<table class="goodsbox" >
 				<thead>
@@ -36,9 +33,7 @@
 </template>
 <script>
 	import "./orderlist.scss"
-	import Vue from 'vue'
-	import {Button} from 'element-ui'
-	Vue.use({Button})
+
 	export default {
 		data:function(){
 			return {
