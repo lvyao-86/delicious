@@ -8,15 +8,16 @@
 		</thead>
 		<tbody v-if="who">
 
-			<tr v-for="(obj,index) in list" v-if="obj.state == '未完成'">
+			<tr v-for="(obj,index) in list" :ref="'c' + index" v-if="obj.state == '未完成'">
 				
 				<td v-for="(val,key) in obj" v-if="colss.indexOf(key) != -1 ">
 				{{key == 'list' ? ''  : val}}
-					 <ul v-if="key == 'list'" class="caibox">
-						<li v-for="(cai,idx)  in  val" @click="addcolor(obj,$event)">{{'['+ cai.name + ']' + '  数量：' + cai.qty }}</li>
+					 <ul v-if="key == 'list'" class="caibox c">
+						<li v-for="(cai,idx)  in  val" :ref="'cs' + index" @click="addcolor(obj,$event)">{{'['+ cai.name + ']' + '  数量：' + cai.qty }}</li>
+						<span @click="successAll('c' + index,'cs' + index,$event)">全部制成</span>
 					</ul> 
 				</td>
-				<td class="caozuo"><button class="okbut" @click="upDateIndent(obj.id,$event)">完成</button></td>
+				<td class="caozuo"><button ref="obbut" class="okbut" @click="upDateIndent(obj.id,$event)">完成</button></td>
 			</tr>
 
 		</tbody>
@@ -135,9 +136,10 @@ export default {
 			// var bili = 1/obj.list.length*100;
 			//原有总数量
 			var childs = obj.list.length;
-			//当前数量
-			var dxchild = ta.parentElement.children.length -1 ;
-
+			//当前数量(排除即将删除的 + 全选的按钮)
+		
+			var dxchild = ta.parentElement.children.length -2 ;
+		
 			var targwidth = 100 - dxchild/childs*100;
 			//按钮当前长度
 			// var butcss = getComputedStyle(okbut).width.split('p')[0];
@@ -174,6 +176,38 @@ export default {
 				alert('还有:' + nowcai + ' 道菜没完成！')
 			}
 		
+		},
+
+		successAll(tr,cs,e){
+
+			var tr = this.$refs[tr];
+			var cais = this.$refs[cs];
+			var caiul = tr[0].querySelector('.caibox');
+			var but = tr[0].querySelector('.okbut');
+			var bili = 100/cais.length;
+
+			if(cais.length >0){
+		
+				Array.prototype.forEach.call(cais,function(item,idx){
+		
+		
+		
+							setTimeout(function(){
+		
+								caiul.removeChild(item);
+								but.style.width = (idx+1)*bili + '%';
+		
+								if(but.style.width.replace('%','')== 100 ){
+									but.style.color = '#fff'
+								}
+								
+							 
+							}.bind(this),idx*200)
+		
+				})
+		
+			}
+
 		}
 	},
 	//created
