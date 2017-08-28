@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50714
 File Encoding         : 65001
 
-Date: 2017-08-28 11:05:32
+Date: 2017-08-28 12:05:42
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -25,11 +25,17 @@ CREATE TABLE `letterbox` (
   `message` varchar(255) DEFAULT NULL,
   `createTime` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of letterbox
 -- ----------------------------
-INSERT INTO `letterbox` VALUES ('1', 'cook', '1号桌，鱼香肉丝，已制成', '2017-08-28 11:04:07');
-INSERT INTO `letterbox` VALUES ('2', 'cook', null, '2017-08-28 11:04:16');
+INSERT INTO `letterbox` VALUES ('1', 'cook', '1号桌:[鱼香肉丝]已制成', '2017-08-28 11:20:31');
+INSERT INTO `letterbox` VALUES ('2', 'cook', '1号桌:[鱼香肉丝]已制成', '2017-08-28 11:20:23');
+INSERT INTO `letterbox` VALUES ('3', 'cook', '123', null);
+INSERT INTO `letterbox` VALUES ('4', 'cook', '123', '2017-08-28 11:44:45');
+INSERT INTO `letterbox` VALUES ('5', '\'123\'', '\'哈哈\'', '2017-08-28 11:46:28');
+INSERT INTO `letterbox` VALUES ('6', 'cook', '33333号桌: [王老吉]  数量：5 已制成，速速来拿！', '2017-08-28 12:00:42');
+INSERT INTO `letterbox` VALUES ('7', 'cook', '555555555号桌: [王老吉]  数量：5 已制成，速速来拿！', '2017-08-28 12:03:03');
+INSERT INTO `letterbox` VALUES ('8', 'cook', '666666号桌: 全部已制成，速速来拿！', '2017-08-28 12:03:11');
 SET FOREIGN_KEY_CHECKS=1;

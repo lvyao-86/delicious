@@ -9,7 +9,7 @@ var mysql = require('mysql');
         host     : 'localhost',
         user     : 'root',
         password : '',
-        database : 'delicious'
+        database : 'zyy'
     })
     connection.connect();
 
@@ -28,5 +28,18 @@ module.exports = {
            	
         });
     },
+     add:function(sql,arr,callback){
+
+    	connection.query(sql,arr,function(err,res,fie){
+     		if(!err){
+     			callback(res)
+     		}else{
+     			callback({state:false,message:'插入失败'})
+     		}
+
+
+     	})
+
+     }
    
 }
