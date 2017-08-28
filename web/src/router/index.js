@@ -9,6 +9,7 @@ import newIndent from '../components/cook/newIndent.vue'
 
 import BackstageComponent from '../components/backstage/backstage-home.vue'
 import MenuComponent from '../components/backstage-menu/menu.vue'
+
 import AddMenuComponent from '../components/addmenu/addmenu.vue'
 import DinnerTableComponent from '../components/dinner-table/dinner-table.vue'
 import LetterBoxComponent from '../components/letterbox/letterbox.vue'
@@ -66,6 +67,7 @@ const router = new VueRouter({
 		name: 'dish',
 		component: dishComponent
 	}]
+
 })
 
 

@@ -6,7 +6,7 @@
 			<dd ref="numbox" v-if="num>0">{{num}}</dd>
 		</dl>
 
-		<div class="tanc" v-show="hasshow">
+		<div class="tanc" v-if="hasshow">
 			<h3>新增订单<b class="iconfont icon-shanchu" @click="messHide"></b></h3>
 			<ul class="messread" >
 				<li v-for="(ddobj,idx) in messData">
@@ -25,6 +25,7 @@
 					<b @click="yesRead">订单已阅读</b>
 			</p>
 		</div>
+		<div ref="mp3"></div>
 	</div>
 
 
@@ -55,12 +56,20 @@ export default {
 			//阅读后清空邮箱 数据
 			this.num = 0;
 			this.messData = [];
+			//清空map3
+			this.$refs.mp3.innerHTML = '';
+			console.log(this.num)
+			console.log(this.messData)
+
 		}
 	},
 	watch:{
 		num:function(news,olds){
 			
-
+			if(news>0){
+				var audio = '<audio  src="./src/assets/mp3/7499.wav" loop autoplay/>'
+				this.$refs.mp3.innerHTML = audio;
+			}
 			
 		}
 	}

@@ -1,5 +1,5 @@
 <template>
-	<table>
+	<table class="cooktable">
 		<thead>
 				<tr>
 					<th v-for="(val,key) in list[0]" v-if="colss.indexOf(key) != -1">{{translate[key]}}</th>
@@ -84,14 +84,18 @@ export default {
 
 						//更新信箱数量及内容传给邮箱组件(不是首次进入页面)
 						if(this.list.length != 0 ){
-							//得出最新内容长度和 原有内容长度差值
+							//得出 最新内容长度和 原有内容长度差值
 							var cha = res.data.length - this.list.length;
 							//组件 qty 图标原有基础上加上差值
-							this.$parent.$children[0].num += cha;
+							this.$parent.$refs.mess.num += cha;
 							//新的内容 合并 原有内容，更新邮箱组件data 
-							this.$parent.$children[0].messData = this.$parent.$children[0].messData.concat(res.data.slice(-cha));
+							// console.log(this.$parent.$children[0])
+							// console.log(res.data.slice(-cha))
+					
+							this.$parent.$refs.mess.messData = this.$parent.$refs.mess.messData.concat(res.data.slice(-cha));
 
 							console.log('邮箱更新')
+							
 
 						}
 						
@@ -208,7 +212,9 @@ export default {
 							 
 							}.bind(this),idx*200)
 		
-				})
+				});
+
+				caiul.removeChild(e.target)
 		
 			}
 
@@ -241,6 +247,8 @@ export default {
 	 	
 	 	//console.log(this.$parent.$children)
 	 	this.getlist();
+	 	console.log(this.$parent.$refs.mess)
+	 	console.log(this.$parent.$refs.mess.messData);
 	 	
 	 },3000)
 
