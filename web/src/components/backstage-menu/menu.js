@@ -9,8 +9,8 @@ const actions = {
 	delMenu: (store, data) => {
 		store.commit('delMenu', data)
 	},
-	editMenu: (store) => {
-		store.commit('editMenu')
+	editMenu: (store, data) => {
+		store.commit('editMenu', data)
 	},
 	searchMenu: (store, data) => {
 		store.commit('searchMenu', data)
@@ -43,14 +43,16 @@ const mutations = {
 		})
 	},
 
- 	editMenu: (_state) => {
- 		http.post('editMenu', {id:1, name:'asdasd'})
+ 	editMenu: (_state, data) => {
+ 		
+ 		http.post('editMenu', data.data)
  		.then(response => {
-
+			data.callback()
  		})
  	},
 
  	searchMenu: (_state, data) => {
+ 		
  		http.post('searchMenu', {keyword: data})
  		.then(response => {
 			state.menu = response.data;
@@ -60,7 +62,7 @@ const mutations = {
 
 const state = {
 	menu: [],
-	category: []
+	category: ['沙拉', '小吃','主菜','汤品','主食','甜点','饮品']
 }
 
 export default {

@@ -4,6 +4,7 @@
 		  	<el-input placeholder="菜名/分类" v-model="keyword">
 		    	<el-button slot="append" icon="search" @click="search"></el-button>
 		  	</el-input>
+		  	<router-link to="/addmenu" class="addmenu"><i class="fa fa-plus-circle fa-lg"></i></router-link>
 		</div>
 		<div class="menu-box">
 			<el-card :body-style="{ padding: '0px' }" v-for="(item, idx) in this.$store.state.backstageMenu.menu" key="idx">
@@ -21,14 +22,17 @@
 		<div class="edit-box" v-if="editStatus">
 			<div class="edit-header">
 				<span>信息编辑</span>
-				<span>&times;</span>
+				<span @click="close" class="close">&times;</span>
 			</div>
-			<el-form :model="editObj"  ref="ruleForm2" label-width="80px" >
-			 	<el-form-item label="菜名：" prop="name">
-			    	<el-input type="text" v-model="editObj.name" auto-complete="off"></el-input>
+			<el-form :model="editObj"  label-width="70px">
+			 	<el-form-item v-for="(val, key, idx) in editObj" :label="cn[key] || key"  key="idx" v-if="key != 'id'  && key != 'remark'">
+			    	<el-input type="text" size="small" v-model="editObj[key]" auto-complete="off"></el-input>
 			  	</el-form-item>
+			  	<div class="editbox-button">
+			  		<el-button type="primary" size="small" @click="()=>{editStatus = false}">取消</el-button>
+    				<el-button type="primary" size="small" @click="save">提交</el-button>
+  				</div>
 			</el-form>
-
 		</div>
 	</div>
 </template>
@@ -41,7 +45,8 @@
 			return {
 				keyword: null,
 				editObj: {},
-				editStatus: false
+				editStatus: false,
+				cn: {name: '菜名:', description: '简介:', category: '分类:', price: '价格:', imgurl: '图片:', timeConsuming: '耗时:'}
 			}
 		},
 		methods: {
@@ -53,7 +58,7 @@
 		        }).then(() => {
 		        	//要删除菜单ID，回调函数CB显示提示信息
 		        	this.$store.dispatch('delMenu', {id: prID, cb: ()=>{
-		        		this.$message({
+		        		this.$message({ 
             				type: 'success',
             				message: '删除成功!'
           				});}
@@ -69,13 +74,20 @@
 				})[0]
 				this.editObj = JSON.parse(JSON.stringify(editData));//解决数据引用类型问题
 				this.editStatus = true;//显示修改框
-				return
-				this.$store.dispatch('editMenu')
 			},
 
 			search: function(){
 				this.$store.dispatch('searchMenu', this.keyword)
-				console.log('asdsad')
+			},
+
+			close(){
+				this.editStatus = false;//关闭修改框
+			},
+
+			save(){
+				this.$store.dispatch('editMenu', {data: this.editObj, callback: () =>{
+					this.editStatus = false; //回调函数关闭弹窗
+				}})
 			}
 		},
 

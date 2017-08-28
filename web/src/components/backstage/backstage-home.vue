@@ -56,6 +56,8 @@
 	export default {
 		methods: {
 			toggle: function(e) {
+
+				//侧栏显示隐藏
 				let ele = e.target;
 				if(ele.classList.contains('fa-outdent')){
 					let status = this.$refs.sidebar.style.display 
@@ -64,14 +66,13 @@
 			},
 
 			selectCategory: function(e){
-				if(e.target.classList.contains('category')){
-					var currentCategory = String.trim(e.target.innerHTML);
+				//点击侧栏分类，获取相应数据
+				if(e.target.classList.contains('category')){ //事件监听，判断是否为target是否符合
+					this.$router.push('menu')
+					var currentCategory = String.trim(e.target.innerHTML);//获取当前分类，去除前后空格
 					this.$store.dispatch('searchMenu', currentCategory)
 				}
 			}
-		},
-		created(){
-			console.log(this.$store.state.backstageMenu.category)
 		}
 	}
 </script>
