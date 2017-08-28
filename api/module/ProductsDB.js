@@ -6,11 +6,7 @@ connection = mysql.createConnection({
     host     : 'localhost',
     user     : 'root',
     password : '',
-<<<<<<< HEAD
     database : 'delicious'
-=======
-    database : 'zyy'
->>>>>>> 028d20e1851440d07c23467ed77615e2cba812ce
 })
 connection.connect();
 

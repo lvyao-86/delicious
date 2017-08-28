@@ -8,19 +8,11 @@ var urlencodedParser = bodyParser.urlencoded({ extended: true })
 
 
 exports.Register = function(app){
-<<<<<<< HEAD
 
-    app.get('/getProducts', urlencodedParser, function(request, response){
-        
-        var condition = "select * from products"
-        //连接数据库
-        DB.repertory(condition, function(result){
-=======
 	
 	function getMenu(table, response){
 		var condition = "select * from " + table;
 		DB.repertory(condition, function(result){
->>>>>>> cb01d895defbaae779fc752b1fdefdc9a71c4f3b
            response.send({status: true, message: '数据请求成功', data: result})
         })
 	}
