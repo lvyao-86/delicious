@@ -16,6 +16,8 @@ import dishComponent from '../components/showdishes/dish.vue'
 
 import OrderComponent from '../components/orderlist/orderlist.vue'
 
+import menuShow from '../components/menuShow/menuShow.vue'
+
 Vue.use(VueRouter)
 
 const router = new VueRouter({
@@ -49,7 +51,12 @@ const router = new VueRouter({
 		path: '/showdishes',
 		name: 'dish',
 		component: dishComponent
-	}]
+		},{
+		path: '/menuShow',
+		name: 'menuShow',
+		component: menuShow
+		}
+	]
 
 })
 
