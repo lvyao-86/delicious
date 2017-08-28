@@ -1,0 +1,72 @@
+
+	.client{
+		height: 100%;
+	}
+	#order{
+		width: 270px;
+		height:100%;
+		background:#504033;	
+		position: relative;
+		color:white;
+	}
+	.logo{
+		height:100px;
+	}
+	h2{padding:10px 0;}
+	.logo,.message{
+		background: #675048;
+	}
+	#goodslist .goodsbox{
+		width: 100%;
+		border-collapse: collapse;
+		tbody{
+			overflow:hidden;
+		}
+		th{
+			background: gray;
+			padding: 0 10px
+		}
+		td{
+			padding:5px 0;
+		}
+		.btnPlus,.btnSub{
+			display:inline-block;
+			width: 25px;
+			text-align:center
+			
+
+		}
+	}
+	.message{
+		width: 100%;
+		position: absolute;
+		left: 0;
+		bottom:0;
+		p{
+			padding:10px;
+			height: 60px;
+			position: relative;
+			.total{
+				position: absolute;
+				left: 20px;top: 15px;
+				.red{
+					color:red;
+					font-size:20px;
+				}
+			}
+			.btnSure{
+				position: absolute;
+				right:35px;top: 0;
+				width: 60px;height: 60px;border-radius: 50% ;
+				background: #FA6C44;border:2px solid yellow;
+				color: white;font-size:18px;
+				}
+		}
+	}
+	.remark{
+		border:none;
+		margin-top:10px;
+		height: 20px;
+
+	}
+	

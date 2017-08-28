@@ -1,12 +1,39 @@
 <template>
-	<div class="menu-box">
-		<dl v-for="(item, idx) in data">
-			<dt><img :src="'./src/assets/images/' + item.imgurl" ></dt>
-			<dd>
-				<span class="pro-name">{{item.name}}</span>
-				<span class="pro-price">￥{{item.price}}</span>
-			</dd>
-		</dl>
+	<div>
+		<div class="search-box">
+		  	<el-input placeholder="菜名/分类" v-model="keyword">
+		    	<el-button slot="append" icon="search" @click="search"></el-button>
+		  	</el-input>
+		  	<router-link to="/addmenu" class="addmenu"><i class="fa fa-plus-circle fa-lg"></i></router-link>
+		</div>
+		<div class="menu-box">
+			<el-card :body-style="{ padding: '0px' }" v-for="(item, idx) in this.$store.state.backstageMenu.menu" key="idx">
+		      	<img :src="'./src/assets/images/' + item.imgurl"  class="image">
+		      	<div style="padding: 14px;">
+			        <span class="pro-name">{{item.name}}</span>
+			        <span class="pro-price">￥{{item.price}}</span>
+			        <div class="bottom clearfix">
+			        	<el-button type="primary" icon="delete" size="mini" @click="del(item.id)"></el-button>
+			        	<el-button type="primary" icon="edit" size="mini" @click="edit(item.id)"></el-button>
+			        </div>
+		      	</div>
+		    </el-card>
+		</div>
+		<div class="edit-box" v-if="editStatus">
+			<div class="edit-header">
+				<span>信息编辑</span>
+				<span @click="close" class="close">&times;</span>
+			</div>
+			<el-form :model="editObj"  label-width="70px">
+			 	<el-form-item v-for="(val, key, idx) in editObj" :label="cn[key] || key"  key="idx" v-if="key != 'id'  && key != 'remark'">
+			    	<el-input type="text" size="small" v-model="editObj[key]" auto-complete="off"></el-input>
+			  	</el-form-item>
+			  	<div class="editbox-button">
+			  		<el-button type="primary" size="small" @click="()=>{editStatus = false}">取消</el-button>
+    				<el-button type="primary" size="small" @click="save">提交</el-button>
+  				</div>
+			</el-form>
+		</div>
 	</div>
 </template>
 
@@ -16,15 +43,56 @@
 	export default {
 		data(){
 			return {
-				data: null
+				keyword: null,
+				editObj: {},
+				editStatus: false,
+				cn: {name: '菜名:', description: '简介:', category: '分类:', price: '价格:', imgurl: '图片:', timeConsuming: '耗时:'}
 			}
 		},
+		methods: {
+			del: function(prID){
+				this.$confirm('是否要删除选中菜品?', '提示', {
+		        	confirmButtonText: '确定',
+		        	cancelButtonText: '取消',
+		        	type: 'warning'
+		        }).then(() => {
+		        	//要删除菜单ID，回调函数CB显示提示信息
+		        	this.$store.dispatch('delMenu', {id: prID, cb: ()=>{
+		        		this.$message({ 
+            				type: 'success',
+            				message: '删除成功!'
+          				});}
+		        	});
+		        }).catch(() => {//忽略取消按钮提示信息     
+		        });
+			},
+			
+			edit: function(prID){
+				//获取当前菜式信息
+				let editData = this.$store.state.backstageMenu.menu.filter( item => {
+					return item.id == prID
+				})[0]
+				this.editObj = JSON.parse(JSON.stringify(editData));//解决数据引用类型问题
+				this.editStatus = true;//显示修改框
+			},
+
+			search: function(){
+				this.$store.dispatch('searchMenu', this.keyword)
+			},
+
+			close(){
+				this.editStatus = false;//关闭修改框
+			},
+
+			save(){
+				this.$store.dispatch('editMenu', {data: this.editObj, callback: () =>{
+					this.editStatus = false; //回调函数关闭弹窗
+				}})
+			}
+		},
+
 		beforeMount(){
-			http.post('getProducts')
-			.then(response => {
-				this.data = response.data
-				console.log(response.data)
-			})
+			this.$store.dispatch('getMenu')
 		}
 	}
 </script>

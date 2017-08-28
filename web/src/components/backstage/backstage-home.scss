@@ -2,76 +2,85 @@
 	height: 100%;
 	display: flex;
 	flex-direction: column;
-}
-.header{
-	display: flex;
-	height: 60px;
-	.header-logo{
-		width: 230px;
-		background: #F36A5A;
-		color: #FFFFFF;
-		line-height: 60px;
-		text-align: center;
-	}
-	.action{
+	font-family: "Microsoft YaHei";
+	.header{
 		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		flex: 1;
-		padding: 0 20px;
-		border-bottom: 1px solid #ddd;
-		.fa-outdent{
-			font-size: 20px;
-			color: #666;
-			&:hover{
-				color: #F36A5A;
-				cursor: pointer;
-			}
+		height: 60px;
+		background: #fff;
+		.header-logo{
+			width: 230px;
+			background: #F36A5A;
+			color: #FFFFFF;
+			line-height: 60px;
+			text-align: center;
 		}
-		.fa-bars{
-			display: none;
-		}
-		.option{
-			width: 10%;
-			ul{
-				width: 100%;
-				display: flex;
-				justify-content: space-between;
-				.fa{
+		.action{
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			flex: 1;
+			padding: 0 20px;
+			border-bottom: 1px solid #ddd;
+			.fa-outdent{
+				font-size: 20px;
+				color: #666;
+				&:hover{
 					color: #F36A5A;
-					font-size: 14px;
+					cursor: pointer;
+				}
+			}
+			.fa-bars{
+				display: none;
+			}
+			.option{
+				width: 10%;
+				ul{
+					width: 100%;
+					display: flex;
+					justify-content: space-between;
+					.fa{
+						color: #F36A5A;
+						font-size: 14px;
+					}
 				}
 			}
 		}
 	}
-}
 
-.content-wrap{
-	flex: 1;
-	display: flex;
-	.side-bar{
-		width: 230px;
-		height: 100%;
-		background: #eef1f6;
-		overflow: hidden;
-		.fa{
-			margin-right: 20px;
-		}
-		.el-submenu li a{
-			font-size: 12px;
-			color: #666;
-		}
-		.el-submenu__title{
-			border-bottom: 1px solid #ddd;
-		}
-		.last-li{
-			padding-left: 7px!important;
-		} 
-	}
-	.content{
-		height: 100%;
+	.content-wrap{
 		flex: 1;
-		overflow: auto;
+		display: flex;
+		.side-bar{
+			width: 230px;
+			height: 100%;
+			background: #eef1f6;
+			overflow: hidden;
+			.fa{
+				margin-right: 20px;
+			}
+			.el-submenu li a{
+				font-size: 12px;
+				color: #666;
+			}
+			.el-submenu__title{
+				
+			}
+			.last-li{
+				padding-left: 7px!important;
+			}
+			.el-menu-item{
+				height: 32px;
+				line-height: 32px;
+			}
+			li .is-active{
+				background: #ddd;
+			} 
+		}
+		.backstage-content{
+			height: 100%;
+			flex: 1;
+			overflow: auto;
+		}
 	}
 }
 

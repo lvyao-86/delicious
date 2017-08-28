@@ -1,47 +1,91 @@
-img{
-	width: 200px;
-	height: 200px; 
-	float: left; 
-	border: 1px solid #ddd;
-	padding: 5px; 
-	border-bottom:0;
-	border-radius: 5px 5px 0 0;
-}
-.menu-box{
-	padding: 5px 10px;
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: center;
-	dl{
-		&:hover{
-			background: #eef1f6;
-			cursor: pointer;
 
+.backstage-content{
+	padding: 0 15px;
+	background: #fff;
+	img{
+		width: 200px;
+		height: 200px; 
+		float: left; 
+		padding: 5px; 
+		
+	}
+	.menu-box{
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-around;
+		.el-card{
+			&:hover{
+				background: #ddd;
+				cursor: pointer;
+			}
+			margin: 5px;
+			.pro-name{
+				font-size: 14px;
+				line-height: 36px;
+				font-weight: 600;
+				color: #666;
+			}
+			.pro-price{
+				color: #ff1a3a;
+			    font-size: 14px;
+			    font-weight: bold;
+			    margin: 10px 0 3px 0;
+			}
 		}
-		margin-bottom: 10px;
-		padding: 10px;
-		dt{
-			overflow: hidden;
-			background: #FFF;
+	}
+	.search-box{
+		padding: 0 10px;
+		margin-top: 5px;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		.el-input{
+			width: 50%;
 		}
-		dd{	
-			background: #FFF;
-			border: 1px solid #ddd;
-			font-family: microsoft yahei;
-			
+		.fa-plus-circle{
+			color: #666;
+			&:hover{
+				color: #F36A5A;
+			}
 		}
-		.pro-name{
-			font-size: 14px;
+	}
+	.edit-box{
+		position: absolute;
+		background: #fff;
+		border-radius: 5px;
+		width: 500px;
+		top: 8%;
+		left: 50%;
+		margin-left: -250px;
+		box-shadow: 5px 5px 5px #888888;
+		padding-bottom: 15px;
+		.edit-header{
+			background: #1DB0B8;
+			height: 36px;
 			line-height: 36px;
 			font-weight: 600;
-			color: #666;
+			border-radius: 5px 5px 0 0;
+			position: relative;
+			color: #FFF;
+			margin-bottom: 10px;
+			.close{
+				position: absolute;
+				right: 0;
+				padding: 0 10px;
+				font-size: 20px;
+				&:hover{
+					color: #F36A5A;
+					cursor: pointer;
+				}
+			}
 		}
-		.pro-price{
-			color: #ff1a3a;
-		    font-size: 14px;
-		    font-weight: bold;
-		    margin: 10px 0 3px 0;
+		.el-form-item{
+			padding-right: 25px;
+			margin-bottom: 15px;
 		}
-    	
+		.editbox-button button{
+			background-color: #1DB0B8;
+			border-color: #1DB0B8;
+		}
 	}
 }
