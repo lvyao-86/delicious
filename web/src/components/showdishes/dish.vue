@@ -11,28 +11,15 @@
 			    <el-table-column
 			      prop="id"
 			      label="编号"
-			      width="50">
+			      width="80">
 			    </el-table-column>
 			    <el-table-column
-			      prop="name"
-			      label="菜名"
-			      width="180">
-			    </el-table-column>
-			    <el-table-column
-			      prop="address"
-			      label="数量">
-			    </el-table-column>
-			    <el-table-column
-			      prop="address"
+			      prop="createTime"
 			      label="下单时间">
 			    </el-table-column>
 			    <el-table-column
-			      prop="address"
+			      prop="number"
 			      label="桌号">
-			    </el-table-column>
-			    <el-table-column
-			      prop="address"
-			      label="操作">
 			    </el-table-column>
 		  	</el-table>
 		</div>
@@ -47,7 +34,7 @@
 			    <el-table-column
 			      prop="id"
 			      label="编号"
-			      width="50">
+			      width="80">
 			    </el-table-column>
 			    <el-table-column
 			      prop="name"
@@ -59,16 +46,18 @@
 			      label="数量">
 			    </el-table-column>
 			    <el-table-column
-			      prop="address"
-			      label="下单时间">
-			    </el-table-column>
-			    <el-table-column
-			      prop="address"
+			      prop="number"
 			      label="桌号">
 			    </el-table-column>
 			    <el-table-column
-			      prop="address"
-			      label="操作">
+			      prop="payment"
+			      label="付款"
+			      width="100">
+			    </el-table-column>
+			    <el-table-column
+			      prop="state"
+			      label="操作"
+			      width="120">
 			    </el-table-column>
 		  	</el-table>
 		</div>
@@ -81,17 +70,17 @@
 	export default {
 	    data() {
 	      return {
-	        tableData3: [{
-	          id: '1',
-	          name: '王小虎',
-	          address: '2'
-	        }]
+	        tableData3: []
 	      }
 	    },
 
 	    created(){
 	    	http.get('indent').then(response => {
-	    		console.log(response.data)
+	    		console.log(1,this.tableData3)
+
+	    		for(var item of response.data){
+	    			this.tableData3.push(item)
+	    		}
 	    	})
 	    } 
 	}
