@@ -89,7 +89,24 @@
 	        tableData4: []
 	      }
 	    },
+	    methods:{
+	    	norepeat: function(arr){
+			 	var newArr = [];
+			 	// 遍历传入的数组arr
+			 	for(var i=0;i<arr.length;i++){
+			 		for(var j=0;j<newArr.length;j++){
+			 			if(arr[i] === newArr[j]){
+			 				break;
+			 			}
+			 		}
+			 		if(j === newArr.length){
+			 			newArr.push(arr[i]);
+			 		}
+			 	}
 
+			 	return newArr;
+	    	}
+	    },
 	    created(){
 	    	http.get('indent').then(response => {
 	    		for(var item of response.data){
@@ -104,26 +121,7 @@
 
 	    				//去掉重复的菜品名
 	    				var res = item.list
-	    				function norepeat(arr){
-						 	var newArr = [];
-
-						 	// 遍历传入的数组arr
-						 	for(var i=0;i<arr.length;i++){
-						 		for(var j=0;j<newArr.length;j++){
-						 			if(arr[i] === newArr[j]){
-						 				break;
-						 			}
-						 		}
-						 		if(j === newArr.length){
-						 			newArr.push(arr[i]);
-						 		}
-						 		
-						 	}
-
-						 	return newArr;
-						}
-
-						var res1 = norepeat(res)
+						var res1 =this.norepeat(res)
 						item.list = res1 
 	    				this.tableData3.push(item)
 	    			}else{
@@ -134,25 +132,7 @@
 
 	    				//去掉重复的菜品名
 	    				var res = item.list
-	    				function norepeat(arr){
-						 	var newArr = [];
-						 	// 遍历传入的数组arr
-						 	for(var i=0;i<arr.length;i++){
-						 		for(var j=0;j<newArr.length;j++){
-						 			if(arr[i] === newArr[j]){
-						 				break;
-						 			}
-						 		}
-						 		if(j === newArr.length){
-						 			newArr.push(arr[i]);
-						 		}
-						 		
-						 	}
-
-						 	return newArr;
-						}
-
-						var res1 = norepeat(res)
+						var res1 = this.norepeat(res)
 						item.list = res1 
 	    				this.tableData4.push(item)
 	    			}
