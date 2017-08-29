@@ -12,6 +12,12 @@ import MenuComponent from '../components/backstage-menu/menu.vue'
 
 import dishComponent from '../components/showdishes/dish.vue'
 
+import chartsComponent from '../components/charts/charts.vue'
+import menuShow from '../components/menuShow/menuShow.vue'
+import AddMenuComponent from '../components/addmenu/addmenu.vue'
+import DinnerTableComponent from '../components/dinner-table/dinner-table.vue'
+
+
 
 Vue.use(VueRouter)
 
@@ -46,14 +52,43 @@ const router = new VueRouter({
 			path: '/menu',
 			name: 'menu',
 			component: MenuComponent
-		
-			}]
-	},{
-		path:'/showdishes',
-		component: dishComponent,
-	}
+		},{
+			path: '/addmenu',
+			name: 'addmenu',
+			component: AddMenuComponent
+		},{
+			path: '/dinnerTable',
+			name: 'dinnerTable',
+			component: DinnerTableComponent
+		},{
+			path: '/letterBox',
+			name: 'letterBox',
+			component: {}
+		},{
+			path: '/charts',
+			name: 'charts',
+			component: chartsComponent
+		}]
+		},{
+		path: '/showdishes',
+		name: 'dish',
+		component: dishComponent
 
-]
+		},{
+			path: '/client',
+			name: 'client',
+			component: ClientComponent,
+			children:[{
+				path: '/menuShow',
+				name: 'menuShow',
+				component: menuShow
+				}]
+		}
+		]
+
+
+
+
 
 })
 

@@ -2,13 +2,13 @@
 	<table class="cooktable">
 		<thead>
 				<tr>
-					<th v-for="(val,key) in list[0]" v-if="colss.indexOf(key) != -1">{{translate[key]}}</th>
-					<th v-if="who">订单操作</th>
+					<th v-for="(val,key) in $store.state.cook.indentData[0]" v-if="colss.indexOf(key) != -1">{{translate[key]}}</th>
+					<th v-if="cookwho">订单操作</th>
 				</tr>
 		</thead>
-		<tbody v-if="who">
+		<tbody v-if="cookwho">
 
-			<tr v-for="(obj,index) in list" :ref="'c' + index" v-if="obj.state == '未完成'">
+			<tr v-for="(obj,index) in $store.state.cook.indentData" :ref="'c' + index" v-if="obj.state == '未完成'">
 				
 				<td v-for="(val,key) in obj" v-if="colss.indexOf(key) != -1 ">
 				{{key == 'list' ? ''  : val}}
@@ -21,8 +21,8 @@
 			</tr>
 
 		</tbody>
-		<tbody v-if="!who">
-			<tr v-for="(obj,idx) in list"  v-if="obj.state == '已完成'">
+		<tbody v-if="!cookwho">
+			<tr v-for="(obj,idx) in $store.state.cook.indentData"  v-if="obj.state == '已完成'">
 				<td v-for="(val,key) in obj" v-if="colss.indexOf(key) != -1 ">
 				{{key == 'list' ? ''  : val}}
 					 <ul v-if="key == 'list'">
@@ -59,11 +59,9 @@ var translate = {
 
 
 export default {
-
+	
 	data:function(){
 		return {
-			list:[],
-			who:true,
 			translate:translate,
 			colss:[],
 			cais:[],
@@ -71,13 +69,7 @@ export default {
 		}
 	},
 	methods:{
-
-	},
-	methods:{
-		show(who){
-			 this.who = who;
-			 
-		},
+	
 		addcolor(obj,e){
 			var ta = e.target;
 			var okbut = ta.parentElement.parentElement.parentElement.querySelector('.okbut');
@@ -187,20 +179,21 @@ export default {
 	},
 	mounted:function(){
 
-	 	this.list =this.$store.state.cook.indentData;
-	 	console.log(1)
+		
+	
+	 	console.log('mounted')
 	 },
 	//created
 	beforeMount:function(){
-		console.log(2)
-	this.$store.dispatch('getCookData')
+		this.$store.dispatch('getCookData')
 
+		console.log('beforeMount')
 	 setInterval(()=>{
-	 	
-	 	//console.log(this.$parent.$children)
+	 
 	 	this.$store.dispatch('getCookData')
 	 	
-	 	console.log(this.$store.state.cook.indentData)
+	 	
+
 	 	
 	 },3000)
 
@@ -209,7 +202,8 @@ export default {
 	this.colss = this.cols.split(',');
 		
 	},
-	props:['cols']
+	props:['cookwho','cols']
+	
 
 
 }

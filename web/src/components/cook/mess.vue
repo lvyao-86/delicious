@@ -3,13 +3,15 @@
 	<div class="cookmess">
 		<dl @click="messShow">
 			<dt class="iconfont icon-youxiang"></dt>
-			<dd ref="numbox" v-if="num>0">{{num}}</dd>
+			<dd ref="numbox" v-if="$store.state.cook.messData.length>0">
+					{{$store.state.cook.messData.length}}
+			</dd>
 		</dl>
 
 		<div class="tanc" v-if="hasshow">
 			<h3>新增订单<b class="iconfont icon-shanchu" @click="messHide"></b></h3>
 			<ul class="messread" >
-				<li v-for="(ddobj,idx) in messData">
+				<li v-for="(ddobj,idx) in $store.state.cook.messData">
 					<p class="c cai">
 					<span v-for="(caiobj,idx) in ddobj.list">{{'[' + caiobj.name + ']  ' + '数量：' + caiobj.qty}}</span>
 					</p>
@@ -40,8 +42,7 @@ export default {
 		return {
 			mess:'信箱',
 			hasshow:false,
-			num:this.$store.state.cook.messData.length,
-			messData:this.$store.state.cook.messData,
+	
 		}
 	},
 	methods:{
