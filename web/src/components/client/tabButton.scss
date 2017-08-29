@@ -1,0 +1,18 @@
+#tabSelect{
+		margin-bottom:20px;
+		.tab1{	
+		}
+		.tab2{
+			position: relative;
+			background:#f4eef9;
+			
+			padding:20px;
+			border-radius:20px;
+			h2{
+				width: 15%;
+				text-align:center;
+				position: absolute;
+				left:0;top: 20px;
+			}
+		}
+	}

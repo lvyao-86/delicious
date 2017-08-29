@@ -4,7 +4,11 @@
 		  	<el-input placeholder="菜名/分类" v-model="keyword">
 		    	<el-button slot="append" icon="search" @click="search"></el-button>
 		  	</el-input>
-		  	<router-link to="/addmenu" class="addmenu"><i class="fa fa-plus-circle fa-lg"></i></router-link>
+		  	<div class="more-options" @click="sort">
+				<span><i class="fa-sort sort-config fa "></i>默认</span>
+				<span><i class="fa-sort-numeric-asc fa  sort-price"></i>价格</span>
+		  		<router-link to="/addmenu" ><i class="fa fa-plus-circle"></i></router-link>
+		  	</div>
 		</div>
 		<div class="menu-box">
 			<el-card :body-style="{ padding: '0px' }" v-for="(item, idx) in this.$store.state.backstageMenu.menu" key="idx">
@@ -46,7 +50,8 @@
 				keyword: null,
 				editObj: {},
 				editStatus: false,
-				cn: {name: '菜名:', description: '简介:', category: '分类:', price: '价格:', imgurl: '图片:', timeConsuming: '耗时:'}
+				cn: {name: '菜名:', description: '简介:', category: '分类:', price: '价格:', imgurl: '图片:', timeConsuming: '耗时:'},
+				sortPrice: false
 			}
 		},
 		methods: {
@@ -88,6 +93,37 @@
 				this.$store.dispatch('editMenu', {data: this.editObj, callback: () =>{
 					this.editStatus = false; //回调函数关闭弹窗
 				}})
+			},
+
+			sort(e){
+				var ele = e.target;
+				//按价格排序
+				if(ele.classList.contains('sort-price')){
+					var data = this.$store.state.backstageMenu.menu;
+					this.sortPrice = !this.sortPrice; //切换排序状态
+					if(this.sortPrice){
+						// 改变icon-font样式
+						ele.classList.remove('fa-sort-numeric-asc')
+						ele.classList.add('fa-sort-numeric-desc')
+						//升序
+						data.sort(function(a, b){
+							return b.price - a.price
+						})
+
+					}else{
+						ele.classList.remove('fa-sort-numeric-desc')
+						ele.classList.add('fa-sort-numeric-asc')
+						//降序
+						data.sort(function(a, b){
+							return a.price - b.price
+						})
+					}
+					
+				}
+				//默认排序
+				if(ele.classList.contains('sort-config')){
+					this.$store.dispatch('dataReverse')
+				}
 			}
 		},
 

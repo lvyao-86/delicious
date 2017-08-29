@@ -6,7 +6,8 @@ var session = require('express-session');
 
 
 var indent = require('./indent');
-
+var menu = require('./menu');
+var client = require('./client');
 
 
 exports.Register = function(express){
@@ -51,6 +52,7 @@ exports.Register = function(express){
 
     ProductsRouter.Register(app);
     indent.Register(app);
-    
+    menu.Register(app);
+    client.Register(app);
     return app;
 }

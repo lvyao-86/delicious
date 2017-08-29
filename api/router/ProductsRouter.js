@@ -30,7 +30,6 @@ var upload = multer({ storage: storage })
 
 exports.Register = function(app){
 
-	
 	function getMenu(table, response){
 		var condition = "select * from " + table;
 		DB.repertory(condition, function(result){
@@ -68,7 +67,8 @@ exports.Register = function(app){
 		condition = condition.slice(0,-1) //去除多余逗号 
 		condition += `WHERE id = ${obj.id}`
 		DB.repertory(condition, function(result){
-			response.send({status: true, message: '修改成功'})
+			//response.send({status: true, message: '修改成功'})
+            getMenu('products', response)
         })
 	})
     
@@ -104,5 +104,53 @@ exports.Register = function(app){
 		DB.repertory(condition, function(result){
            response.send({status: true, message: '菜式新增成功'})
         })
+    })
+
+    //获取信箱消息
+    app.get('/getLetterBox', (request, response) => {
+        getMenu('letterbox', response)
+    })
+
+    //清空信箱
+    app.get('/clearLetterBox', (request, response) => {
+        var condition = "DELETE FROM letterbox";
+        DB.repertory(condition, function(result){
+           response.send({status: true, message: '清空信箱成功'})
+        })
+    })
+    
+    app.post('/getData', urlencodedParser, (request, response) => {
+        var table = request.body.tableName;
+        getMenu(table, response)
+
+    })
+
+   /* app.post('/getTableOrder', urlencodedParser, (request, response) =>{
+        var name = request.body.name;
+        var tableName = request.body.tableName;
+        var condition = `select * from ${tableName} where name = '${name}'`
+        DB.repertory(condition, function(result){
+           response.send({status: true, message: '数据请求成功', data: result})
+        })
+    } )*/
+
+    app.post('/getTableOrder', urlencodedParser, (request, response) => {
+        console.log(request.body)
+        var tableNum =  request.body.name
+        var condition = "select * from indent where payment = '未付款'"
+        var res;
+        DB.repertory(condition, function(result){
+            result.forEach((item) => {
+                if(item.number == tableNum){
+                    res = item
+                }
+            })
+            if(res){
+                response.send({status: true, message: '数据请求成功', data: res})
+            }else{
+                response.send({status: false, message: '没有订单信息'})
+            }
+        })
+       
     })
 }

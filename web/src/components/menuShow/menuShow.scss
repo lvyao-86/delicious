@@ -7,14 +7,9 @@
     margin-top: 13px;
     line-height: 12px;
   }
-
-  .button {
-    padding: 0;
-    float: right;
-  }
-
   .image {
-    width: 100%;
+    width: 200px;
+    height:175px;
     display: block;
   }
 
@@ -27,3 +22,54 @@
   .clearfix:after {
       clear: both
   }
+
+#wih {
+    width: 200px;
+    margin-left: 30px;
+    margin-top:5px;
+}
+.descrip{
+  light-height:25px;
+  font-size:14px;
+  color:#666;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding:5px;
+}
+.price{
+  color:red;
+}
+.button {
+    position: absolute;
+    right: 10px;
+    top: -10px;
+    padding: 5px;
+    border:none;
+    border-radius: 50%;
+    background-color: red;
+    color: white;
+    font-weight: bold;
+}
+.pce{
+  font-size:16px;
+  text-align:left;
+  position: relative;
+  padding:2px;
+}
+#foodsdatalist{
+  height: 100%;
+  .el-row{
+    height: 100%;
+    overflow:hidden;
+  }
+  .block{
+    padding-top:22px;
+    .el-pagination{
+      color: #fff;
+    }
+    .el-pager{
+      color: #666;
+    }
+  }
+}

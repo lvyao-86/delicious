@@ -2,17 +2,17 @@
 .backstage-content{
 	padding: 0 15px;
 	background: #fff;
-	img{
-		width: 200px;
-		height: 200px; 
-		float: left; 
-		padding: 5px; 
-		
-	}
 	.menu-box{
 		display: flex;
 		flex-wrap: wrap;
 		justify-content: space-around;
+		img{
+			width: 200px;
+			height: 200px; 
+			float: left; 
+			padding: 5px; 
+			
+		}
 		.el-card{
 			&:hover{
 				background: #ddd;
@@ -42,11 +42,24 @@
 		.el-input{
 			width: 50%;
 		}
-		.fa-plus-circle{
-			color: #666;
-			&:hover{
-				color: #F36A5A;
+		.more-options{
+			font-size: 13px;
+			span{
+				margin-right: 20px;
 			}
+			.fa{
+				font-size: 16px;
+				color: #666;
+				&:hover{
+					color: #F36A5A;
+					cursor: pointer;
+				}
+			}
+			[class^=fa]{
+			
+				margin-right: 5px;
+			}
+			
 		}
 	}
 	.edit-box{

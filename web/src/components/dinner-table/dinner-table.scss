@@ -1,0 +1,55 @@
+.dinner-table{
+	font-size: 12px;
+	width: 380px;
+	float: left;
+	border-right: 1px solid #ddd;
+	img{
+		width: 150px;
+		height: 100px;
+		margin: 5px;
+		border: 1px solid #ddd;
+		padding: 5px 0;
+		display: block;
+		border-radius: 4px;
+	}
+	.table{
+		float: left;
+		border: 1px solid #ddd;
+		margin: 5px 10px;
+		border-radius: 4px;
+
+		.status{
+			background: #F5F5DC;
+			height: 22px;
+			line-height: 22px;
+			color: #666;
+			font-weight: 600;
+		}
+		.fa-eye{
+			color: #666;
+			padding: 3px;
+			font-size: 15px;
+			&:hover{
+				cursor: pointer;
+				color: #F36A5A;
+			}
+		}
+		.table-number{
+			display: flex;
+    		justify-content: space-around;
+    		margin: 5px 0;
+    		span{
+    			margin-top: 2px;
+    			font-weight: 600;
+    			color: #666;
+    		}
+		}
+	}
+}
+.table-order{
+	overflow: hidden;
+	h2{
+		border-bottom: 1px solid #ddd;
+		padding: 5px 0;
+	}
+}
