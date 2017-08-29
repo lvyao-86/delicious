@@ -3,7 +3,7 @@
 		<div class="dinner-table">
 			<div v-for="(item, idx) in data" class="table">
 				<img src="../../assets/images/table.jpg">
-				<p class="status">{{item.status}}</p>
+				<p class="status">{{tableStatus.indexOf(idx+1) >= 0? '使用中':'空闲'}}</p>
 				<p class="table-number">
 					<span>台号: {{item.name}}</span>
 					<i class="fa fa-eye" @click="open(item)"></i>
@@ -23,6 +23,12 @@
 						<td>{{item.qty * item.price}}</td>
 					</tr>
 				</tbody>
+				<tfoot>
+					<tr>
+						<th>合计</th>
+						<th v-for="(val, key) in sum">{{val}}</th>
+					</tr>
+				</tfoot>
 			</table>
 		</div>	
 	</div>
@@ -34,22 +40,32 @@
 	export default {
 		data(){
 			return {
-				data:[{name: '夏日风情沙拉', status: 'false', qty: 1, price: 38,  subtotal: 38}, {name: '土豆培根奶酪球', status: 'false', qty: 1, price: 38,  subtotal: 38},{name: '鲜虾天妇罗', status: 'true', qty: 1, price: 38,  subtotal: 38}],
+				data:[{name: '夏日风情沙拉', status: 'false', qty: 1, price: 38,  subtotal: 38}],
 				tableFiled: {name: '菜名', status: '状态', qty: '数量', price: '单价', subtotal: '小计'},
-				status: {false: '制作中', true: '已上菜'},
+				status: {false: '空闲', true: '使用中'},
 				currentTable: null,
-				currentData: []
-				
-
+				currentData: [],
+				sum:{},
+				tableStatus: []
 			}
 		},
 		methods:{
 			open(data){
-				this.currentTable = data.name;
+				this.currentTable = data.name; //桌号
 				http.post('getTableOrder', {name: data.name})
 				.then( response => {
 					if(response.data){
-						this.currentData = JSON.parse(response.data.list)
+						//表格数据
+						this.currentData = response.data
+
+						//表格合计
+						var [priceSum, qtySum, totalSum] = [0, 0, 0];
+						response.data.forEach( item => {
+							priceSum += Number(item.price)
+							qtySum += Number(item.qty)
+							totalSum += Number(item.price)*Number(item.qty)
+						})
+						this.sum = {priceSum: priceSum, qtySum: qtySum, totalSum: totalSum}
 					}else{
 						this.currentData = '';
 					}
@@ -61,6 +77,20 @@
 			.then( response =>{
 				this.data = response.data;
 			})
+			
+			//页面刷新获取餐桌状态
+			http.get('tableStatus')
+			.then( response =>{
+				this.tableStatus = response.data;
+			})
+			
+			//餐桌状态监听
+			setInterval(() =>{
+				http.get('tableStatus')
+				.then( response =>{
+					this.tableStatus = response.data;
+				})
+			}, 10000)
 		}
 	}
 </script>
