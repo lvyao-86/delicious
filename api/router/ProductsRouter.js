@@ -122,35 +122,42 @@ exports.Register = function(app){
     app.post('/getData', urlencodedParser, (request, response) => {
         var table = request.body.tableName;
         getMenu(table, response)
-
     })
 
-   /* app.post('/getTableOrder', urlencodedParser, (request, response) =>{
-        var name = request.body.name;
-        var tableName = request.body.tableName;
-        var condition = `select * from ${tableName} where name = '${name}'`
-        DB.repertory(condition, function(result){
-           response.send({status: true, message: '数据请求成功', data: result})
-        })
-    } )*/
-
     app.post('/getTableOrder', urlencodedParser, (request, response) => {
-        console.log(request.body)
         var tableNum =  request.body.name
         var condition = "select * from indent where payment = '未付款'"
-        var res;
+       
+        var res = []; //存放结果
+        var allOrder; //存放订单筛选结果
         DB.repertory(condition, function(result){
-            result.forEach((item) => {
-                if(item.number == tableNum){
-                    res = item
-                }
+            //数据筛选
+            allOrder = result.filter( item => {
+                 return item.number == tableNum
             })
+            //数组合并
+            allOrder.forEach( item => {
+                res = res.concat(JSON.parse(item.list))
+            })
+
             if(res){
                 response.send({status: true, message: '数据请求成功', data: res})
             }else{
                 response.send({status: false, message: '没有订单信息'})
             }
         })
-       
+    })
+    
+    //获取正在使用中台号
+    app.get('/tableStatus', (request, response) => {
+        DB.repertory("select * from indent where payment = '未付款'", result => {
+            var arr =[]
+            result.forEach(item => {
+                if(arr.indexOf(item.number) < 0){
+                    arr.push(item.number)
+                }
+            })
+            response.send({status: true, data: arr})
+        })
     })
 }
