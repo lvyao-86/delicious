@@ -119,11 +119,13 @@ exports.Register = function(app){
         })
     })
     
+    //获取所有餐桌信息
     app.post('/getData', urlencodedParser, (request, response) => {
         var table = request.body.tableName;
         getMenu(table, response)
     })
-
+    
+    //获取相应餐桌的订单
     app.post('/getTableOrder', urlencodedParser, (request, response) => {
         var tableNum =  request.body.name
         var condition = "select * from indent where payment = '未付款'"
@@ -158,6 +160,17 @@ exports.Register = function(app){
                 }
             })
             response.send({status: true, data: arr})
+        })
+    })
+
+    //charts获取销量数据
+    app.get('/sales', (request, response) => {
+        DB.repertory("select * from indent", result => {
+            var res = [];
+            result.forEach( item => {
+                res = res.concat(JSON.parse(item.list))
+            })
+            response.send({status: true, data: res})
         })
     })
 }
