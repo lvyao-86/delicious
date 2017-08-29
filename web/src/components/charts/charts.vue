@@ -9,59 +9,94 @@
         data () {
             return {
                 charts: '',
-                opinion:['沙拉', '小吃','主菜','汤品','主食','甜点','饮品'],
-                opinionData:[
-                  {value:100, name:'沙拉'},
-                  {value:120, name:'小吃'},
-                  {value:80, name:'主菜'},
-                  {value:50, name:'汤品'},
-                  {value:88, name:'主食'},
-                  {value:92, name:'甜点'},
-                  {value:200, name:'饮品'}
-                ]
+                
+                dataAxis: ['沙拉', '小吃', '主菜', '汤品', '主食', '甜品', '饮品'],
+                data: [220, 182, 191, 234, 290, 330, 310],
+                yMax: 600
             }
         },
         methods:{
             drawPie(id){
-               this.charts = echarts.init(document.getElementById(id))
-               this.charts.setOption({
-                 tooltip: {
-                   trigger: 'item',
-                   formatter: '{a}<br/>{b}:{c} ({d}%)'
-                 },
-                 legend: {
-                   orient: 'vertical',
-                   x: 'left',
-                   data:this.opinion
-                 },
-                 series: [
-                   {
-                     name:'访问来源',
-                     type:'pie',
-                     radius:['50%','70%'],
-                     avoidLabelOverlap: false,
-                     label: {
-                       normal: {
-                         show: false,
-                         position: 'center'
-                       },
-                       emphasis: {
-                         show: true,
-                         textStyle: {
-                           fontSize: '30',
-                           fontWeight: 'blod'
-                         }
-                       }
-                     },
-                     labelLine: {
-                       normal: {
-                         show: false
-                       }
-                     },
-                     data:this.opinionData
-                   }
-                 ]
-               })
+                this.charts = echarts.init(document.getElementById(id))
+                this.charts.setOption({
+                    title: {  
+                        text: '菜品分类单日销量',  
+                        subtext: '纯属扯犊子',  
+                        x: 'center'  
+                    },
+                    xAxis: {
+                        data: this.dataAxis,
+                        axisLabel: {
+                            inside: true,
+                            textStyle: {
+                                color: '#fff'
+                            }
+                        },
+                        axisTick: {
+                            show: false
+                        },
+                        axisLine: {
+                            show: false
+                        },
+                        z: 10
+                    },
+                    yAxis: {
+                        axisLine: {
+                            show: false
+                        },
+                        axisTick: {
+                            show: false
+                        },
+                        axisLabel: {
+                            textStyle: {
+                                color: '#999'
+                            }
+                        }
+                    },
+                    dataZoom: [
+                        {
+                            type: 'inside'
+                        }
+                    ],
+                    series: [
+                        {
+                            type: 'bar',
+                            itemStyle: {
+                                normal: {
+                                    color: new echarts.graphic.LinearGradient(
+                                        0, 0, 0, 1,
+                                        [
+                                            {offset: 0, color: '#83bff6'},
+                                            {offset: 0.5, color: '#188df0'},
+                                            {offset: 1, color: '#188df0'}
+                                        ]
+                                    )
+                                },
+                                emphasis: {
+                                    color: new echarts.graphic.LinearGradient(
+                                        0, 0, 0, 1,
+                                        [
+                                            {offset: 0, color: '#2378f7'},
+                                            {offset: 0.7, color: '#2378f7'},
+                                            {offset: 1, color: '#83bff6'}
+                                        ]
+                                    )
+                                }
+                            },
+                            data: this.data
+                        }
+                    ]
+                });
+
+                var zoomSize = 6;
+                var _self = this;
+                this.charts.on('click', function (params) {
+                    this.dispatchAction({
+                        type: 'dataZoom',
+                        startValue: _self.dataAxis[Math.max(params.dataIndex - zoomSize / 2, 0)],
+                        endValue: _self.dataAxis[Math.min(params.dataIndex + zoomSize / 2, _self.data.length - 1)]
+                    });
+                });
             }
         },
       //调用
