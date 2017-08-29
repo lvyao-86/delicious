@@ -1,5 +1,5 @@
 <template>
-	<table>
+	<table class="cooktable">
 		<thead>
 				<tr>
 					<th v-for="(val,key) in list[0]" v-if="colss.indexOf(key) != -1">{{translate[key]}}</th>
@@ -8,15 +8,16 @@
 		</thead>
 		<tbody v-if="who">
 
-			<tr v-for="(obj,index) in list" v-if="obj.state == '未完成'">
+			<tr v-for="(obj,index) in list" :ref="'c' + index" v-if="obj.state == '未完成'">
 				
 				<td v-for="(val,key) in obj" v-if="colss.indexOf(key) != -1 ">
 				{{key == 'list' ? ''  : val}}
-					 <ul v-if="key == 'list'" class="caibox">
-						<li v-for="(cai,idx)  in  val" @click="addcolor(obj,$event)">{{'['+ cai.name + ']' + '  数量：' + cai.qty }}</li>
+					 <ul v-if="key == 'list'" class="caibox c">
+						<li v-for="(cai,idx)  in  val" :ref="'cs' + index" @click="addcolor(obj,$event)">{{'['+ cai.name + ']' + '  数量：' + cai.qty }}</li>
+						<span @click="successAll('c' + index,'cs' + index,obj,$event)">全部制成</span>
 					</ul> 
 				</td>
-				<td class="caozuo"><button class="okbut" @click="upDateIndent(obj.id,$event)">完成</button></td>
+				<td class="caozuo"><button ref="obbut" class="okbut" @click="upDateIndent(obj.id,$event)">完成</button></td>
 			</tr>
 
 		</tbody>
@@ -83,14 +84,18 @@ export default {
 
 						//更新信箱数量及内容传给邮箱组件(不是首次进入页面)
 						if(this.list.length != 0 ){
-							//得出最新内容长度和 原有内容长度差值
+							//得出 最新内容长度和 原有内容长度差值
 							var cha = res.data.length - this.list.length;
 							//组件 qty 图标原有基础上加上差值
-							this.$parent.$children[0].num += cha;
+							this.$parent.$refs.mess.num += cha;
 							//新的内容 合并 原有内容，更新邮箱组件data 
-							this.$parent.$children[0].messData = this.$parent.$children[0].messData.concat(res.data.slice(-cha));
+							// console.log(this.$parent.$children[0])
+							// console.log(res.data.slice(-cha))
+					
+							this.$parent.$refs.mess.messData = this.$parent.$refs.mess.messData.concat(res.data.slice(-cha));
 
 							console.log('邮箱更新')
+							
 
 						}
 						
@@ -135,9 +140,10 @@ export default {
 			// var bili = 1/obj.list.length*100;
 			//原有总数量
 			var childs = obj.list.length;
-			//当前数量
-			var dxchild = ta.parentElement.children.length -1 ;
-
+			//当前数量(排除即将删除的 + 全选的按钮)
+		
+			var dxchild = ta.parentElement.children.length -2 ;
+		
 			var targwidth = 100 - dxchild/childs*100;
 			//按钮当前长度
 			// var butcss = getComputedStyle(okbut).width.split('p')[0];
@@ -148,6 +154,10 @@ export default {
 			if(targwidth == 100){
 				okbut.style.color = '#fff'
 			}
+
+			//推送信息给信箱
+			var mess = obj.number + '号桌: ' + ta.innerText + ' 已制成，速速来拿！';
+			this.cookMessToBOX(mess)
 
 		},
 		upDateIndent(id,e){
@@ -174,6 +184,60 @@ export default {
 				alert('还有:' + nowcai + ' 道菜没完成！')
 			}
 		
+		},
+
+		successAll(tr,cs,obj,e){
+
+			var tr = this.$refs[tr];
+			var cais = this.$refs[cs];
+			var caiul = tr[0].querySelector('.caibox');
+			var but = tr[0].querySelector('.okbut');
+			var bili = 100/cais.length;
+
+			if(cais.length >0){
+		
+				Array.prototype.forEach.call(cais,function(item,idx){
+		
+		
+		
+							setTimeout(function(){
+		
+								caiul.removeChild(item);
+								but.style.width = (idx+1)*bili + '%';
+		
+								if(but.style.width.replace('%','')== 100 ){
+									but.style.color = '#fff'
+								}
+								
+							 
+							}.bind(this),idx*200)
+		
+				});
+
+				caiul.removeChild(e.target)
+		
+			}
+
+			//推送消息给信箱
+			var mess = obj.number + '号桌: 全部已制成，速速来拿！';
+			this.cookMessToBOX(mess)
+			
+
+		},
+
+		cookMessToBOX(datas){
+			 //添加信息到信箱
+			 http.get('toLetter',{who:'cook',message:datas}).then(res=>{
+						console.log(res)
+				 		if(res.state){
+				 			console.log('推送成功')
+				 		}else{
+							console.log('推送失败')
+				 		}
+
+				 })
+
+
 		}
 	},
 	//created
@@ -183,6 +247,8 @@ export default {
 	 	
 	 	//console.log(this.$parent.$children)
 	 	this.getlist();
+	 	console.log(this.$parent.$refs.mess)
+	 	console.log(this.$parent.$refs.mess.messData);
 	 	
 	 },3000)
 
