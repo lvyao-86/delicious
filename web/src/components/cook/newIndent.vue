@@ -106,7 +106,7 @@ export default {
 
 				//api 获取 id 更新订单状态
 				 http.get('upIndent',{id:id}).then(res=>{
-						console.log(res)
+						
 				 		if(res.state){
 				 			this.$store.dispatch('getCookData','once')
 				 			console.log('更改成功，重新渲染')

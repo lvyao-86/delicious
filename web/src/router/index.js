@@ -61,10 +61,6 @@ const router = new VueRouter({
 			name: 'dinnerTable',
 			component: DinnerTableComponent
 		},{
-			path: '/letterBox',
-			name: 'letterBox',
-			component: {}
-		},{
 			path: '/charts',
 			name: 'charts',
 			component: chartsComponent
