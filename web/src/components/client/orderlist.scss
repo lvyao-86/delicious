@@ -3,37 +3,45 @@
 		height: 100%;
 	}
 	#order{
-		width: 270px;
+		width: 250px;
 		height:100%;
-		background:#504033;	
+		background:#675048;	
 		position: relative;
 		color:white;
 	}
-	.logo{
-		height:100px;
-	}
 	h2{padding:10px 0;}
 	.logo,.message{
-		background: #675048;
+		background: #504033;
 	}
-	#goodslist .goodsbox{
+	.logo{
+		height:100px;
+		background:url('../../assets/images/logo.jpg') no-repeat;
+		background-size:100% 100%;
+	}
+	#goodslist .goodsBox{
 		width: 100%;
 		border-collapse: collapse;
 		tbody{
-			overflow:hidden;
+			overflow:auto;
 		}
-		th{
-			background: gray;
-			padding: 0 10px
-		}
-		td{
-			padding:5px 0;
+		tr{
+			display:flex;
+			justify-content: space-between;
+			padding:0;
+			th{
+				background:none;
+				
+			}
+			td{
+				padding:0;
+				align-self:center;
+			}
 		}
 		.btnPlus,.btnSub{
 			display:inline-block;
-			width: 25px;
-			text-align:center
-			
+			padding:10px;
+			text-align:center;
+			float:right;
 
 		}
 	}

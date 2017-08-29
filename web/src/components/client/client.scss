@@ -1,3 +1,36 @@
 #client{
 		height: 100%;
+		background:url('../../assets/images/orderbg.jpg') no-repeat;
+		background-size:cover;
+		#order{
+			float:left;		
+		}
+		.right{
+			height: 100%;
+			float:left;
+			width: 70%;
+			margin-left:2%;
+			#tabSelect{
+				
+				.el-input{
+					width: 50%;
+					margin:20px;
+				}
+			}
+			#foodsdata{
+				width: 100%;
+				height: 61%;
+				border:1px solid white;
+				background:white;
+				#goodsbrowse{
+					width: 100%;height: 100%;
+					
+					background:url('../../assets/images/bg3.jpg') repeat;
+				}
+			}
+		}
+		
 	}
+	.v-enter{opacity: 0 ;transform: translateX(500px);}
+	.v-enter-active{ opacity: 1;transform: translateX(0);transition:all 1s}
+	.v-leave-active{opacity: 0;transform: translateX(-500px);transition: all .5s}

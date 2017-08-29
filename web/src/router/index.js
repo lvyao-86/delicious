@@ -51,14 +51,15 @@ const router = new VueRouter({
 		name: 'dish',
 		component: dishComponent
 		},{
-		path: '/menuShow',
-		name: 'menuShow',
-		component: menuShow
-		},{
 			path: '/client',
 			name: 'client',
 			component: ClientComponent,
-			children:[]
+			children:[{
+				path: '/menuShow',
+				name: 'menuShow',
+				component: menuShow
+				}
+			]
 		}]
 })
 
