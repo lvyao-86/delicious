@@ -40,8 +40,8 @@ export default {
 		return {
 			mess:'信箱',
 			hasshow:false,
-			num:0,
-			messData:[]
+			num:this.$store.state.cook.messData.length,
+			messData:this.$store.state.cook.messData,
 		}
 	},
 	methods:{

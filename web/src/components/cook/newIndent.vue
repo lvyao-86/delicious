@@ -68,61 +68,6 @@ export default {
 			colss:[],
 			cais:[],
 			
-			getlist:function(mode){
-					http.get('indent').then(res=>{
-					//获取订单数据
-					
-
-					if(res.data.length > this.list.length){
-						
-						//转换菜单列表为对象（默认是json字符串）
-						res.data.forEach(function(item,idx){
-
-								item.list = JSON.parse(item.list);
-								
-						})
-
-						//更新信箱数量及内容传给邮箱组件(不是首次进入页面)
-						if(this.list.length != 0 ){
-							//得出 最新内容长度和 原有内容长度差值
-							var cha = res.data.length - this.list.length;
-							//组件 qty 图标原有基础上加上差值
-							this.$parent.$refs.mess.num += cha;
-							//新的内容 合并 原有内容，更新邮箱组件data 
-							// console.log(this.$parent.$children[0])
-							// console.log(res.data.slice(-cha))
-					
-							this.$parent.$refs.mess.messData = this.$parent.$refs.mess.messData.concat(res.data.slice(-cha));
-
-							console.log('邮箱更新')
-							
-
-						}
-						
-
-						
-						this.list = res.data;
-						
-					}
-					//如果模式为渲染请求
-					if(mode == 'once'){
-						//转换菜单列表为对象（默认是json字符串）
-						res.data.forEach(function(item,idx){
-
-								item.list = JSON.parse(item.list);
-								
-						})
-
-						this.list = res.data;
-
-					}
-					
-					
-
-				})
-			}
-
-			
 		}
 	},
 	methods:{
@@ -171,7 +116,7 @@ export default {
 				 http.get('upIndent',{id:id}).then(res=>{
 						console.log(res)
 				 		if(res.state){
-				 			this.getlist('once')
+				 			this.$store.dispatch('getCookData','once')
 				 			console.log('更改成功，重新渲染')
 				 		}else{
 							console.log('更改失败')
@@ -240,15 +185,22 @@ export default {
 
 		}
 	},
+	mounted:function(){
+
+	 	this.list =this.$store.state.cook.indentData;
+	 	console.log(1)
+	 },
 	//created
 	beforeMount:function(){
+		console.log(2)
+	this.$store.dispatch('getCookData')
 
 	 setInterval(()=>{
 	 	
 	 	//console.log(this.$parent.$children)
-	 	this.getlist();
-	 	console.log(this.$parent.$refs.mess)
-	 	console.log(this.$parent.$refs.mess.messData);
+	 	this.$store.dispatch('getCookData')
+	 	
+	 	console.log(this.$store.state.cook.indentData)
 	 	
 	 },3000)
 
