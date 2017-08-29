@@ -39,17 +39,15 @@
 		data:function(){
 			return {
 				input:'',
-				id:2,
+				id:parseInt(Math.random()*10)+1,
 				cols:['序号','菜名','单价','操作'],
 				list:[],
-				message:'',
-				tishi:''
-
+				message:''
 			}
 		},
 		methods:{
 			sureOrder:function(){
-				console.log(13131)
+				console.log(this.list)
 				var data = {
 					number:2,
 					boy:'小明',
@@ -58,12 +56,16 @@
 					payment:'未付款',
 					message:this.message,
 					price:this.total
-				}
-				$.post('http://localhost:888/addData',{data:data},function(res){
-						this.tishi=res;
-						this.open();
+				};
+				if(this.list.length > 0){
+					$.post('http://localhost:888/addData',{data:data},function(res){
+						this.$message(res);
 						this.list=[];
-				}.bind(this))
+						this.$parent.$refs.menuShow.list=[];
+					}.bind(this))
+				}else{
+					this.$message('请选菜');
+				}
 			},
 			btnPlus:function(index){
 				this.list[index].qty++
@@ -72,9 +74,6 @@
 				if(this.list[index].qty<=0){
 					this.list.splice(index,1)
 				}
-			},
-			open(){
-				this.$message(this.tishi)
 			}
 		},
 		computed:{

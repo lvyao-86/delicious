@@ -23,6 +23,7 @@ exports.Register = function(app){
         var condition = `INSERT INTO indent ${keyStr} VALUES ${valStr}`
         DB.menus(condition,function(result){
             if(result){
+                console.log(result);
                  response.send('下单成功');
             }else{
                  response.send('下单失败');
