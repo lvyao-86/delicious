@@ -15,7 +15,7 @@ import DinnerTableComponent from '../components/dinner-table/dinner-table.vue'
 import LetterBoxComponent from '../components/letterbox/letterbox.vue'
 import dishComponent from '../components/showdishes/dish.vue'
 import chartsComponent from '../components/charts/charts.vue'
-
+import menuShow from '../components/menuShow/menuShow.vue'
 Vue.use(VueRouter)
 
 const router = new VueRouter({
@@ -24,11 +24,6 @@ const router = new VueRouter({
 		path: '/',
 		name: 'home',
 		component: HomeComponent,
-		children: [{
-			path: '/client',
-			name: 'client',
-			component: ClientComponent
-		}]
 	},
 	{
 		path: '/login',
@@ -79,11 +74,11 @@ const router = new VueRouter({
 				path: '/menuShow',
 				name: 'menuShow',
 				component: menuShow
-				}
-			]
-		}]
+				}]
+		}
+		]
 
-	}]
+
 
 
 })

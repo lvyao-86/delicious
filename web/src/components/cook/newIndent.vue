@@ -247,8 +247,8 @@ export default {
 	 	
 	 	//console.log(this.$parent.$children)
 	 	this.getlist();
-	 	console.log(this.$parent.$refs.mess)
-	 	console.log(this.$parent.$refs.mess.messData);
+	 	// console.log(this.$parent.$refs.mess)
+	 	// console.log(this.$parent.$refs.mess.messData);
 	 	
 	 },3000)
 

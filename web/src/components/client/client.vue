@@ -3,12 +3,14 @@
 		<orderlist ref='orderlist'></orderlist>
 		<div class="right">
 			<tabButton ref='tabButton'></tabButton>
-			<transition name='v'>
-				<div id="foodsdata">
-					<goodsbrowse v-show="isShow" ref='goodsbrowse'></goodsbrowse>
+			
+			<div id="foodsdata">
+				<goodsbrowse v-show="isShow" ref='goodsbrowse'></goodsbrowse>
+				<transition name='v' tag="div">
 					<menuShow v-show="!isShow" ref='menuShow'></menuShow>
-				</div>
-			</transition>	
+				</transition>	
+			</div>
+			
 			
 			
 		</div>
@@ -37,3 +39,6 @@
 		
 	}
 </script>
+<style>
+	
+</style>

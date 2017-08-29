@@ -63,5 +63,13 @@
     height: 100%;
     overflow:hidden;
   }
-  .block{padding-top:22px;}
+  .block{
+    padding-top:22px;
+    .el-pagination{
+      color: #fff;
+    }
+    .el-pager{
+      color: #666;
+    }
+  }
 }

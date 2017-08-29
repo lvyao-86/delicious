@@ -125,12 +125,32 @@ exports.Register = function(app){
 
     })
 
-    app.post('/getTableOrder', urlencodedParser, (request, response) =>{
+   /* app.post('/getTableOrder', urlencodedParser, (request, response) =>{
         var name = request.body.name;
         var tableName = request.body.tableName;
         var condition = `select * from ${tableName} where name = '${name}'`
         DB.repertory(condition, function(result){
            response.send({status: true, message: '数据请求成功', data: result})
         })
-    } )
+    } )*/
+
+    app.post('/getTableOrder', urlencodedParser, (request, response) => {
+        console.log(request.body)
+        var tableNum =  request.body.name
+        var condition = "select * from indent where payment = '未付款'"
+        var res;
+        DB.repertory(condition, function(result){
+            result.forEach((item) => {
+                if(item.number == tableNum){
+                    res = item
+                }
+            })
+            if(res){
+                response.send({status: true, message: '数据请求成功', data: res})
+            }else{
+                response.send({status: false, message: '没有订单信息'})
+            }
+        })
+       
+    })
 }

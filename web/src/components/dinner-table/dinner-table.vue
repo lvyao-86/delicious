@@ -46,9 +46,13 @@
 		methods:{
 			open(data){
 				this.currentTable = data.name;
-				http.post('getTableOrder', {tableName: 'dinnertable', name: data.name})
+				http.post('getTableOrder', {name: data.name})
 				.then( response => {
-					this.currentData = JSON.parse(response.data[0].order)
+					if(response.data){
+						this.currentData = JSON.parse(response.data.list)
+					}else{
+						this.currentData = '';
+					}
 				})
 			}
 		},

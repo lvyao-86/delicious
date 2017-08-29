@@ -23,7 +23,7 @@
         :page-size="qty"
         :page-sizes="[2,4,8,10]"
         layout="total, sizes, prev, pager, next, jumper"
-        :total="pageCount">
+        :total="totallist.length">
       </el-pagination>
     </div>
   </div>
@@ -69,7 +69,7 @@ export default {
       $.post('http://localhost:888/menu',{category:type},function(response){
         this.totallist = response;
         this.pageCount = Math.ceil(this.totallist.length/this.qty)*10;
-        console.log(this.pageCount);
+        console.log('asdasd',this.pageCount);
       }.bind(this))
     },
     open:function(idx){
