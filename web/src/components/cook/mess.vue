@@ -3,13 +3,15 @@
 	<div class="cookmess">
 		<dl @click="messShow">
 			<dt class="iconfont icon-youxiang"></dt>
-			<dd ref="numbox" v-if="num>0">{{num}}</dd>
+			<dd ref="numbox" v-if="showNum(this.$store.state.cook.messData.length)">
+					{{$store.state.cook.messData.length}}
+			</dd>
 		</dl>
 
 		<div class="tanc" v-if="hasshow">
 			<h3>新增订单<b class="iconfont icon-shanchu" @click="messHide"></b></h3>
 			<ul class="messread" >
-				<li v-for="(ddobj,idx) in messData">
+				<li v-for="(ddobj,idx) in $store.state.cook.messData">
 					<p class="c cai">
 					<span v-for="(caiobj,idx) in ddobj.list">{{'[' + caiobj.name + ']  ' + '数量：' + caiobj.qty}}</span>
 					</p>
@@ -40,8 +42,7 @@ export default {
 		return {
 			mess:'信箱',
 			hasshow:false,
-			num:0,
-			messData:[]
+			
 		}
 	},
 	methods:{
@@ -54,25 +55,29 @@ export default {
 		yesRead:function(){
 			this.hasshow = false;
 			//阅读后清空邮箱 数据
-			this.num = 0;
-			this.messData = [];
-			//清空map3
+			this.$store.dispatch('removeMessTo');
 			this.$refs.mp3.innerHTML = '';
-			console.log(this.num)
-			console.log(this.messData)
+			console.log(this.$store)
+			
 
+
+		},
+		showNum:function(states){
+
+				if(states > 0 ){
+					var audio = '<audio  src="./src/assets/mp3/7499.wav" loop autoplay/>'
+					this.$refs.mp3.innerHTML = audio;
+					return true
+				}else{
+					
+					return false
+				}	
+				
 		}
 	},
-	watch:{
-		num:function(news,olds){
-			
-			if(news>0){
-				var audio = '<audio  src="./src/assets/mp3/7499.wav" loop autoplay/>'
-				this.$refs.mp3.innerHTML = audio;
-			}
-			
-		}
-	}
+	
+	
+	
 }
 
 </script>

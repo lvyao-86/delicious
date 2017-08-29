@@ -10,12 +10,15 @@ import newIndent from '../components/cook/newIndent.vue'
 import BackstageComponent from '../components/backstage/backstage-home.vue'
 import MenuComponent from '../components/backstage-menu/menu.vue'
 
-import AddMenuComponent from '../components/addmenu/addmenu.vue'
-import DinnerTableComponent from '../components/dinner-table/dinner-table.vue'
-import LetterBoxComponent from '../components/letterbox/letterbox.vue'
 import dishComponent from '../components/showdishes/dish.vue'
+
 import chartsComponent from '../components/charts/charts.vue'
 import menuShow from '../components/menuShow/menuShow.vue'
+import AddMenuComponent from '../components/addmenu/addmenu.vue'
+import DinnerTableComponent from '../components/dinner-table/dinner-table.vue'
+
+
+
 Vue.use(VueRouter)
 
 const router = new VueRouter({
@@ -24,6 +27,11 @@ const router = new VueRouter({
 		path: '/',
 		name: 'home',
 		component: HomeComponent,
+		children: [{
+			path: '/client',
+			name: 'client',
+			component: ClientComponent
+		}]
 	},
 	{
 		path: '/login',
@@ -53,10 +61,6 @@ const router = new VueRouter({
 			name: 'dinnerTable',
 			component: DinnerTableComponent
 		},{
-			path: '/letterBox',
-			name: 'letterBox',
-			component: LetterBoxComponent
-		},{
 			path: '/charts',
 			name: 'charts',
 			component: chartsComponent
@@ -77,6 +81,7 @@ const router = new VueRouter({
 				}]
 		}
 		]
+
 
 
 

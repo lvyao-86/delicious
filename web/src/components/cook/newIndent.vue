@@ -2,13 +2,13 @@
 	<table class="cooktable">
 		<thead>
 				<tr>
-					<th v-for="(val,key) in list[0]" v-if="colss.indexOf(key) != -1">{{translate[key]}}</th>
-					<th v-if="who">订单操作</th>
+					<th v-for="(val,key) in $store.state.cook.indentData[0]" v-if="colss.indexOf(key) != -1">{{translate[key]}}</th>
+					<th v-if="cookwho">订单操作</th>
 				</tr>
 		</thead>
-		<tbody v-if="who">
+		<tbody v-if="cookwho">
 
-			<tr v-for="(obj,index) in list" :ref="'c' + index" v-if="obj.state == '未完成'">
+			<tr v-for="(obj,index) in $store.state.cook.indentData" :ref="'c' + index" v-if="obj.state == '未完成'">
 				
 				<td v-for="(val,key) in obj" v-if="colss.indexOf(key) != -1 ">
 				{{key == 'list' ? ''  : val}}
@@ -21,8 +21,8 @@
 			</tr>
 
 		</tbody>
-		<tbody v-if="!who">
-			<tr v-for="(obj,idx) in list"  v-if="obj.state == '已完成'">
+		<tbody v-if="!cookwho">
+			<tr v-for="(obj,idx) in $store.state.cook.indentData"  v-if="obj.state == '已完成'">
 				<td v-for="(val,key) in obj" v-if="colss.indexOf(key) != -1 ">
 				{{key == 'list' ? ''  : val}}
 					 <ul v-if="key == 'list'">
@@ -59,80 +59,17 @@ var translate = {
 
 
 export default {
-
+	
 	data:function(){
 		return {
-			list:[],
-			who:true,
 			translate:translate,
 			colss:[],
 			cais:[],
 			
-			getlist:function(mode){
-					http.get('indent').then(res=>{
-					//获取订单数据
-					
-
-					if(res.data.length > this.list.length){
-						
-						//转换菜单列表为对象（默认是json字符串）
-						res.data.forEach(function(item,idx){
-
-								item.list = JSON.parse(item.list);
-								
-						})
-
-						//更新信箱数量及内容传给邮箱组件(不是首次进入页面)
-						if(this.list.length != 0 ){
-							//得出 最新内容长度和 原有内容长度差值
-							var cha = res.data.length - this.list.length;
-							//组件 qty 图标原有基础上加上差值
-							this.$parent.$refs.mess.num += cha;
-							//新的内容 合并 原有内容，更新邮箱组件data 
-							// console.log(this.$parent.$children[0])
-							// console.log(res.data.slice(-cha))
-					
-							this.$parent.$refs.mess.messData = this.$parent.$refs.mess.messData.concat(res.data.slice(-cha));
-
-							console.log('邮箱更新')
-							
-
-						}
-						
-
-						
-						this.list = res.data;
-						
-					}
-					//如果模式为渲染请求
-					if(mode == 'once'){
-						//转换菜单列表为对象（默认是json字符串）
-						res.data.forEach(function(item,idx){
-
-								item.list = JSON.parse(item.list);
-								
-						})
-
-						this.list = res.data;
-
-					}
-					
-					
-
-				})
-			}
-
-			
 		}
 	},
 	methods:{
-
-	},
-	methods:{
-		show(who){
-			 this.who = who;
-			 
-		},
+	
 		addcolor(obj,e){
 			var ta = e.target;
 			var okbut = ta.parentElement.parentElement.parentElement.querySelector('.okbut');
@@ -169,9 +106,9 @@ export default {
 
 				//api 获取 id 更新订单状态
 				 http.get('upIndent',{id:id}).then(res=>{
-						console.log(res)
+						
 				 		if(res.state){
-				 			this.getlist('once')
+				 			this.$store.dispatch('getCookData','once')
 				 			console.log('更改成功，重新渲染')
 				 		}else{
 							console.log('更改失败')
@@ -240,15 +177,23 @@ export default {
 
 		}
 	},
+	mounted:function(){
+
+		
+	
+	 	console.log('mounted')
+	 },
 	//created
 	beforeMount:function(){
+		this.$store.dispatch('getCookData')
 
+		console.log('beforeMount')
 	 setInterval(()=>{
+	 
+	 	this.$store.dispatch('getCookData')
 	 	
-	 	//console.log(this.$parent.$children)
-	 	this.getlist();
-	 	// console.log(this.$parent.$refs.mess)
-	 	// console.log(this.$parent.$refs.mess.messData);
+	 	
+
 	 	
 	 },3000)
 
@@ -257,7 +202,8 @@ export default {
 	this.colss = this.cols.split(',');
 		
 	},
-	props:['cols']
+	props:['cookwho','cols']
+	
 
 
 }
