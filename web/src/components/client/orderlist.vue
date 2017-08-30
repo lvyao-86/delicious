@@ -49,7 +49,7 @@
 			sureOrder:function(){
 				console.log(this.list)
 				var data = {
-					number:2,
+					number:this.id,
 					boy:'小明',
 					list:JSON.stringify(this.list),
 					state:'未完成',
@@ -61,6 +61,7 @@
 					$.post('http://localhost:888/addData',{data:data},function(res){
 						this.$message(res);
 						this.list=[];
+						this.message='';
 						this.$parent.$refs.menuShow.list=[];
 					}.bind(this))
 				}else{

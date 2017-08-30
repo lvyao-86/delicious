@@ -75,11 +75,6 @@ export default {
     open:function(idx){
       this.datalist.forEach(function(item,index){
         if(item.ID == idx){
-          this.$confirm('你确定要点这道菜吗？', item.name, {
-            confirmButtonText: '确定',
-            cancelButtonText: '取消',
-            type: 'warning'
-          }).then(() => {
             var rest = this.list.filter(function(temp){
               return temp.name === item.name;
             });
@@ -94,16 +89,6 @@ export default {
               this.list.push(goods);
             }
             console.log(this.list);
-            this.$message({
-              type: 'success',
-              message: `${item.name}: ${ item.description }`
-            });
-          }).catch(() => {
-            this.$message({
-              type: 'info',
-              message: '已取消'
-            });          
-          });
         }
       }.bind(this))
     },
