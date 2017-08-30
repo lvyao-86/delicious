@@ -27,11 +27,7 @@ const router = new VueRouter({
 		path: '/',
 		name: 'home',
 		component: HomeComponent,
-		children: [{
-			path: '/client',
-			name: 'client',
-			component: ClientComponent
-		}]
+		children: []
 	},
 	{
 		path: '/login',
