@@ -68,7 +68,7 @@
                         }                                                                                   
                     }, 
                     yAxis: {
-                        data: options.yAxisData
+                        data: options.yAxisData,
                     },
                     series: [{
                         name: '销量',
@@ -80,7 +80,14 @@
                                     var colorList = ['#C1232B','#B5C334','#FCCE10','#E87C25','#27727B','#FE8463','#9BCA63','#FAD860','#F3A43B','#60C0DD','#D7504B','#C6E579','#F4E001','#F0805A','#26C0C0','rgb(164,205,238)','rgb(42,170,227)'];
                                     return colorList[params.dataIndex];
                                 },
-
+                                label: function(){
+                                    if(options.yAxisData)
+                                    return  {
+                                        show: true,
+                                        position: 'right',
+                                        formatter: '{c}'
+                                    }
+                                }()
                             }
                         }
                     }],
@@ -130,7 +137,6 @@
                     })(chartsData);
 
                     var allSales = {ele: 'charts',title: '菜式销量', subtext: 'Sales Example', xAxisData: arr1, seriesData: arr2}
-                    var top10 = {ele: 'top10',title: '销量TOP5', subtext: 'Sales Example', yAxisData: ['t1','t2','t3','t4','t5'], seriesData: [1,2,3,4,5]}
                     this.drawPie(allSales)
                    
                 })
