@@ -1,6 +1,8 @@
 <template>
-  <!--为echarts准备一个具备大小的容器dom-->
-  <div id="charts" style="width: 600px;height: 350px;"></div>
+    <div>
+        <div id="charts" style="width: 700px;height: 400px;"></div>
+        <div id="top10" style="width: 700px;height: 400px;"></div>
+    </div>
 </template>
 <script>
     import echarts from 'echarts'
@@ -17,30 +19,30 @@
             }
         },
         methods:{
-            drawPie(id, arr1, arr2){
-                this.charts = echarts.init(document.getElementById(id))
+            drawPie(options){
+                this.charts = echarts.init(document.getElementById(options.ele))
                 this.charts.setOption({
                     title: {
-                        text: '菜式销量排行',
-                        subtext: 'Sales Example',
+                        text: options.title,
+                        subtext: options.subtext,
                         x: 'center'
                     },
                     tooltip: {},
                      toolbox: {
                         show: true,
                         feature: {
-                            restore: {show: true},
+                            dataView: {show: true, readOnly: false},
                         }
                     },
                     /*legend: {
                         data:['销量']
                     },*/
                     xAxis: {
-                        data: arr1,
+                        data: options.xAxisData,
                         axisLabel: {  
                             interval:0,  
                             formatter: function(value) {  
-                                debugger  
+                                
                                 var ret = "";//拼接加\n返回的类目项  
                                 var maxLength = 2;//每项显示文字个数  
                                 var valLength = value.length;//X轴类目项的文字个数  
@@ -65,18 +67,20 @@
                             }  
                         }                                                                                   
                     }, 
-                    yAxis: {},
+                    yAxis: {
+                        data: options.yAxisData
+                    },
                     series: [{
                         name: '销量',
                         type: 'bar',
-                        data: arr2,
+                        data: options.seriesData,
                         itemStyle: {
                             normal: {
                                 color: function (params){
                                     var colorList = ['#C1232B','#B5C334','#FCCE10','#E87C25','#27727B','#FE8463','#9BCA63','#FAD860','#F3A43B','#60C0DD','#D7504B','#C6E579','#F4E001','#F0805A','#26C0C0','rgb(164,205,238)','rgb(42,170,227)'];
                                     return colorList[params.dataIndex];
                                 },
-                                
+
                             }
                         }
                     }],
@@ -98,7 +102,37 @@
                         arr1.push(item.name)
                         arr2.push(Number(item.qty))
                     })
-                    this.drawPie('charts', arr1, arr2)
+                    //销量TOP5
+                    ;(() => {
+                        var qtyArr = [];
+                        var yAxisData = [];
+                        var seriesData = []
+                        var salesRank = chartsData.sort( (a,b) => {
+                            return b.qty - a.qty
+                        })
+
+                        salesRank.forEach( item => {
+                            if(qtyArr.length < 5 && qtyArr.indexOf(item.qty) < 0){
+                                qtyArr.push(item.qty)
+                            }
+                        })
+                        
+                        salesRank = salesRank.filter((item) => {
+                            return item.qty >= qtyArr[qtyArr.length - 1]
+                        })
+                        
+                        salesRank.forEach( item => {
+                            yAxisData.unshift(item.name)
+                            seriesData.unshift(Number(item.qty))
+                        })
+                        var top10 = {ele: 'top10',title: '销量TOP5', subtext: 'Sales Example', yAxisData: yAxisData, seriesData: seriesData}
+                        this.drawPie(top10)
+                    })(chartsData);
+
+                    var allSales = {ele: 'charts',title: '菜式销量', subtext: 'Sales Example', xAxisData: arr1, seriesData: arr2}
+                    var top10 = {ele: 'top10',title: '销量TOP5', subtext: 'Sales Example', yAxisData: ['t1','t2','t3','t4','t5'], seriesData: [1,2,3,4,5]}
+                    this.drawPie(allSales)
+                   
                 })
             })
         },
@@ -112,8 +146,8 @@
         padding: 0;
         list-style: none;
     }
-    #charts{
-        /*margin: 0 auto;*/
-        margin-top: 20px;
+    #charts, #top10{
+        margin: 0 auto;
+        margin-top: 10px;
     }
 </style>
