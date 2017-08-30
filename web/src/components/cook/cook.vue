@@ -3,7 +3,7 @@
 		<h1>{{name}} <mess ref="mess"></mess></h1>
 		<button :class="{butactive:who}" @click="active1">未完成订单</button>
 		<button :class="{butactive:!who}" @click="active1">已完成订单</button>
-		<newIndent  cols='number,list,message,createTime'></newIndent>
+		<newIndent  cols='number,list,message,createTime' :cookwho="who"></newIndent>
 
 	</div>
 
@@ -33,7 +33,8 @@ export default {
 		active1:function(){
 			
 			this.who = !this.who;
-			this.$children[1].show(this.who)
+			
+			
 			
 		},
 		

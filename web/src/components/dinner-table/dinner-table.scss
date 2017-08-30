@@ -47,9 +47,23 @@
 	}
 }
 .table-order{
-	overflow: hidden;
-	h2{
-		border-bottom: 1px solid #ddd;
+	overflow: auto;
+	
+	h3{
 		padding: 5px 0;
+		margin-bottom: 10px;
+	}
+	table{
+		background: #eee;
+		margin: 0 auto;
+		min-width: 650px;
+		border: 1px solid #666;
+		border-collapse: collapse;
+		tr,th,td{
+			border: 1px solid #666;
+		}
+		th,td{
+			padding: 5px;
+		}
 	}
 }

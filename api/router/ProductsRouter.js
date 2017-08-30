@@ -119,38 +119,71 @@ exports.Register = function(app){
         })
     })
     
+    //获取所有餐桌信息
     app.post('/getData', urlencodedParser, (request, response) => {
         var table = request.body.tableName;
         getMenu(table, response)
-
     })
-
-   /* app.post('/getTableOrder', urlencodedParser, (request, response) =>{
-        var name = request.body.name;
-        var tableName = request.body.tableName;
-        var condition = `select * from ${tableName} where name = '${name}'`
-        DB.repertory(condition, function(result){
-           response.send({status: true, message: '数据请求成功', data: result})
-        })
-    } )*/
-
+    
+    //获取相应餐桌的订单
     app.post('/getTableOrder', urlencodedParser, (request, response) => {
-        console.log(request.body)
         var tableNum =  request.body.name
         var condition = "select * from indent where payment = '未付款'"
-        var res;
+       
+        var res = []; //存放结果
+        var allOrder; //存放订单筛选结果
         DB.repertory(condition, function(result){
-            result.forEach((item) => {
-                if(item.number == tableNum){
-                    res = item
-                }
+            //数据筛选
+            allOrder = result.filter( item => {
+                 return item.number == tableNum
             })
+            //数组合并
+            allOrder.forEach( item => {
+                res = res.concat(JSON.parse(item.list))
+            })
+
             if(res){
                 response.send({status: true, message: '数据请求成功', data: res})
             }else{
                 response.send({status: false, message: '没有订单信息'})
             }
         })
-       
+    })
+    
+    //获取正在使用中台号
+    app.get('/tableStatus', (request, response) => {
+        DB.repertory("select * from indent where payment = '未付款'", result => {
+            var arr =[]
+            result.forEach(item => {
+                if(arr.indexOf(item.number) < 0){
+                    arr.push(item.number)
+                }
+            })
+            response.send({status: true, data: arr})
+        })
+    })
+
+    //charts获取销量数据
+    app.get('/sales', (request, response) => {
+        DB.repertory("select * from indent", result => {
+            var arr = []; //空数组存放结果
+            //获取所有订单数据
+            result.forEach( item => {
+                arr = arr.concat(JSON.parse(item.list))
+            })
+            //数据处理，相同菜品，销量相加
+            var newArr = [arr[0]]
+            for(var i=1; i<arr.length; i++){
+                for(var j=0; j<newArr.length; j++){
+                    if(arr[i].name == newArr[j].name){
+                        newArr[j].qty += Number(arr[i].qty)
+                        break;
+                    }else if(arr[i].name != newArr[j].name && j == newArr.length - 1){
+                        newArr.push(arr[i])
+                    }
+                }
+            }
+            response.send({status: true, message: '获取菜品销量成功', data: newArr})
+        })
     })
 }
