@@ -39,24 +39,31 @@
 }
 .price{
   color:red;
+
+
 }
 .button {
     position: absolute;
     right: 10px;
     top: -10px;
-    padding: 5px;
+    padding: 3px;
     border:none;
     border-radius: 50%;
     background-color: red;
     color: white;
     font-weight: bold;
+    transform:translate(0,10px);
+    z-index:11;
 }
 .pce{
   font-size:16px;
   text-align:left;
   position: relative;
   padding:2px;
+   white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
 }
+
+
 #foodsdatalist{
   height: 100%;
   .el-row{

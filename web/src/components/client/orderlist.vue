@@ -26,7 +26,7 @@
 		</div>	
 		<div class="message">
 			<p><i style="font-size: 20px;color: red">{{id}}</i> 号桌备注：
-			<input type="text" v-model='message' class="remark"></p>
+			<textarea  v-model='message' class="remark" cols="30" rows="10"></textarea></p>
 			<p><span class="total">小计：<i class="red">￥{{total}}</i></span><input type="button" value="下单" class="btnSure" @click="sureOrder"></p>
 			</div>
 	</div>
@@ -39,31 +39,34 @@
 		data:function(){
 			return {
 				input:'',
-				id:2,
+				id:parseInt(Math.random()*10)+1,
 				cols:['序号','菜名','单价','操作'],
 				list:[],
-				message:'',
-				tishi:''
-
+				message:''
 			}
 		},
 		methods:{
 			sureOrder:function(){
-				console.log(13131)
+				console.log(this.list)
 				var data = {
-					number:2,
+					number:this.id,
 					boy:'小明',
 					list:JSON.stringify(this.list),
 					state:'未完成',
 					payment:'未付款',
 					message:this.message,
 					price:this.total
-				}
-				$.post('http://localhost:888/addData',{data:data},function(res){
-						this.tishi=res;
-						this.open();
+				};
+				if(this.list.length > 0){
+					$.post('http://localhost:888/addData',{data:data},function(res){
+						this.$message(res);
 						this.list=[];
-				}.bind(this))
+						this.message='';
+						this.$parent.$refs.menuShow.list=[];
+					}.bind(this))
+				}else{
+					this.$message('请选菜');
+				}
 			},
 			btnPlus:function(index){
 				this.list[index].qty++
@@ -72,9 +75,6 @@
 				if(this.list[index].qty<=0){
 					this.list.splice(index,1)
 				}
-			},
-			open(){
-				this.$message(this.tishi)
 			}
 		},
 		computed:{

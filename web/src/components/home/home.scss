@@ -1,15 +1,21 @@
-#home{height: 100%; }
-#header{height: 10%; background: #FFF0F5;}
-#footer{height: 10%; background: #AFEEEE;}
+#home{height: 100%;background:url(../../assets/images/bg8.jpg) no-repeat;
+background-size:100% 100% }
+#header{height: 10%; }
+#footer{height: 10%; }
 #container{
 	height: 80%; 
-	background: #F0FFF0;
+	
 	ul{
-		float: left;
-		width: 150px;
+		padding-top:100px;
 		li{
-			border: 1px solid #ddd;
-			padding: 5px 0;
+			
+			padding: 20px 0;
+			font-size:28px;
+			letter-spacing:5px;
+			&:hover{
+				color:red
+			}
+
 		}
 	}
 }

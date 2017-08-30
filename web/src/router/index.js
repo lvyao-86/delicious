@@ -11,7 +11,7 @@ import BackstageComponent from '../components/backstage/backstage-home.vue'
 import MenuComponent from '../components/backstage-menu/menu.vue'
 
 import dishComponent from '../components/showdishes/dish.vue'
-
+import LetterBoxComponent from '../components/letterbox/letterbox.vue'
 import chartsComponent from '../components/charts/charts.vue'
 import menuShow from '../components/menuShow/menuShow.vue'
 import AddMenuComponent from '../components/addmenu/addmenu.vue'
@@ -28,6 +28,7 @@ const router = new VueRouter({
 		name: 'home',
 		component: HomeComponent,
 		children: []
+
 	},
 	{
 		path: '/login',
@@ -60,6 +61,10 @@ const router = new VueRouter({
 			path: '/charts',
 			name: 'charts',
 			component: chartsComponent
+		},{
+			path: '/letterbox',
+			name: 'letterbox',
+			component: LetterBoxComponent
 		}]
 		},{
 		path: '/showdishes',

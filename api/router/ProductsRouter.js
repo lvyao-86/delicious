@@ -119,11 +119,13 @@ exports.Register = function(app){
         })
     })
     
+    //获取所有餐桌信息
     app.post('/getData', urlencodedParser, (request, response) => {
         var table = request.body.tableName;
         getMenu(table, response)
     })
-
+    
+    //获取相应餐桌的订单
     app.post('/getTableOrder', urlencodedParser, (request, response) => {
         var tableNum =  request.body.name
         var condition = "select * from indent where payment = '未付款'"
@@ -158,6 +160,30 @@ exports.Register = function(app){
                 }
             })
             response.send({status: true, data: arr})
+        })
+    })
+
+    //charts获取销量数据
+    app.get('/sales', (request, response) => {
+        DB.repertory("select * from indent", result => {
+            var arr = []; //空数组存放结果
+            //获取所有订单数据
+            result.forEach( item => {
+                arr = arr.concat(JSON.parse(item.list))
+            })
+            //数据处理，相同菜品，销量相加
+            var newArr = [arr[0]]
+            for(var i=1; i<arr.length; i++){
+                for(var j=0; j<newArr.length; j++){
+                    if(arr[i].name == newArr[j].name){
+                        newArr[j].qty += Number(arr[i].qty)
+                        break;
+                    }else if(arr[i].name != newArr[j].name && j == newArr.length - 1){
+                        newArr.push(arr[i])
+                    }
+                }
+            }
+            response.send({status: true, message: '获取菜品销量成功', data: newArr})
         })
     })
 }

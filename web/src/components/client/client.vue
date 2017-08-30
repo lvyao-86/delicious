@@ -24,6 +24,7 @@
 	import tabButton from './tabButton.vue'
 	import goodsbrowse from './goodsbrowse.vue'
 	import menuShow from '../menuShow/menuShow.vue'
+	import $ from 'jquery'
 	export default {
 		data:function(){
 			return {
