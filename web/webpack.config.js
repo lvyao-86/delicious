@@ -56,7 +56,7 @@ module.exports = {
       },
       {
         test: /\.(eot|svg|ttf|woff|woff2)(\?\S*)?$/,
-        loader: 'file-loader'
+        loader: 'url-loader?limit=80000&name=fonts/[name].[md5.hash.hex:7].[ext]'
       },
       {
           test: /\.scss$/,
