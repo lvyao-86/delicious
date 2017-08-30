@@ -27,6 +27,12 @@
                         subtext: options.subtext,
                         x: 'center'
                     },
+                    grid: {  
+                         left: '10',  
+                         right: '10',  
+                        bottom: '1%',  
+                        containLabel: true  
+                    },  
                     tooltip: {},
                      toolbox: {
                         show: true,
@@ -42,9 +48,8 @@
                         axisLabel: {  
                             interval:0,  
                             formatter: function(value) {  
-                                
                                 var ret = "";//拼接加\n返回的类目项  
-                                var maxLength = 2;//每项显示文字个数  
+                                var maxLength = 1;//每项显示文字个数  
                                 var valLength = value.length;//X轴类目项的文字个数  
                                 var rowN = Math.ceil(valLength / maxLength); //类目项需要换行的行数  
                                 if (rowN > 1)//如果类目项的文字大于3,  
@@ -78,14 +83,14 @@
                         itemStyle: {
                             normal: {
                                 color: function (params){
-                                    var colorList = ['#C1232B','#B5C334','#FCCE10','#E87C25','#27727B','#FE8463','#9BCA63','#FAD860','#F3A43B','#60C0DD','#D7504B','#C6E579','#F4E001','#F0805A','#26C0C0','rgb(164,205,238)','rgb(42,170,227)'];
+                                    var colorList = ['#C1232B','#B5C334','#FCCE10','#E87C25','#27727B','#FE8463','#9BCA63','#FAD860','#F3A43B','#60C0DD','#D7504B','#C6E579','#F4E001','#F0805A','#26C0C0','rgb(164,205,238)','rgb(42,170,227)','#C1232B','#B5C334','#FCCE10','#E87C25','#27727B','#FE8463','#9BCA63','#FAD860','#F3A43B','#60C0DD','#D7504B','#C6E579','#F4E001','#F0805A','#26C0C0','rgb(164,205,238)','rgb(42,170,227)'];
                                     return colorList[params.dataIndex];
                                 },
                                 label: function(){
                                     if(options.yAxisData){
                                         return  {
                                             show: true,
-                                            position: 'right',
+                                            position: 'top',
                                             formatter: '{c}'
                                         }
                                     }
