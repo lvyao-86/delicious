@@ -1,7 +1,7 @@
 <template>
     <div>
         <div id="charts" style="width: 700px;height: 400px;"></div>
-        <div id="top10" style="width: 700px;height: 400px;"></div>
+        <div id="top10" style="width: 700px;height: 300px;"></div>
     </div>
 </template>
 <script>
@@ -73,6 +73,7 @@
                     series: [{
                         name: '销量',
                         type: 'bar',
+                        barWidth: 18,
                         data: options.seriesData,
                         itemStyle: {
                             normal: {
