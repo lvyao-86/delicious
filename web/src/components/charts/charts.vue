@@ -81,11 +81,12 @@
                                     return colorList[params.dataIndex];
                                 },
                                 label: function(){
-                                    if(options.yAxisData)
-                                    return  {
-                                        show: true,
-                                        position: 'right',
-                                        formatter: '{c}'
+                                    if(options.yAxisData){
+                                        return  {
+                                            show: true,
+                                            position: 'right',
+                                            formatter: '{c}'
+                                        }
                                     }
                                 }()
                             }
