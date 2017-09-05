@@ -18,25 +18,28 @@
 		background:url('../../assets/images/logo.jpg') no-repeat;
 		background-size:100% 100%;
 	}
-	#goodslist .goodsBox{
+	#goodslist {
 		width: 100%;
-		border-collapse: collapse;
-		tbody{
-			overflow:auto;
-		}
-		tr{
-			display:flex;
-			justify-content: space-between;
-			padding:0;
-			th{
-				background:none;
-				
+		height: 60%;
+		overflow:auto;
+		padding:0 !important;
+		.goodsBox{
+			border-collapse: collapse;
+			width: 100%;
+			tbody{
+				font-size:14px;
 			}
-			td{
-				padding:0;
-				align-self:center;
+			tr{
+				th{
+				}
+				td{				
+					white-space:nowrap;
+					text-overflow:ellipsis;
+					
+				}
 			}
 		}
+	
 		.btnPlus,.btnSub{
 			display:inline-block;
 			padding:10px;
